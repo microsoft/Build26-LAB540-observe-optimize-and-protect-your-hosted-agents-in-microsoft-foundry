@@ -1,35 +1,3 @@
-# 🚀 Get Started
-
-**This repo is where attendees go to continue their learning after your session — and your Copilot agent will help you set it up.**
-
-### Step 1: Open your repo
-
-Open this repo in a **Codespace** (click the green **Code** button → **Create a Codespace**) — or clone it locally. Then open **GitHub Copilot Chat**.
-
-### Step 2: Add your content
-
-Give the agent something to work with. Drag files into the Explorer panel — session abstracts, outlines, screenshots, notes — and drop them in one of two places:
-
-| Where to put it | What goes there | Who sees it |
-|---|---|---|
-| **`_remove-before-publish/`** | Internal reference materials (abstracts, outlines, screenshots, planning docs) | **Copilot only** — never published |
-| **`/docs/`, `/src/`, or repo root** | Lab instructions, demo code, sample data, getting-started guides | **Attendees** — published with the repo |
-
-> 💡 Not sure? Start by dropping your session abstract or outline into `_remove-before-publish/`. The agent will figure out what to do with it.
-
-### Step 3: Ask the Agent
-
-Once your content is in the repo, use these three phrases with Copilot to build out your session repo:
-
-| Phrase to use with Copilot | What it does | When to run it |
-|---|---|---|
-| **"Help me get started"** | Sets up session title, description, outcomes, and owners | After you've added your session abstract or outline to the repo |
-| **"Help me refine content"** | Organizes your session content into the repo | Each time you add or update content |
-| **"Help me finalize"** | Final review, cleanup, and publication prep | When you're ready to publish |
-
-> 💡 **These three phrases are just the starting point.** Copilot can do much more — try asking it to brainstorm next steps for attendees, generate code samples, or build out your repo structure. Don't be afraid to put it in plan mode and ask for what you need.
-
----
 
 <p align="center">
 <img src="img/banner-build-26.png" alt="Microsoft Build 2026" width="1200"/>
@@ -37,33 +5,45 @@ Once your content is in the repo, use these three phrases with Copilot to build 
 
 # [Microsoft Build 2026](https://build.microsoft.com)
 
-## 🔥 BRKXXX: SESSION TITLE
+## LAB540: Observe. Optimize and Protect Your Hosted Agents in Microsoft Foundry
 
 ### Session Description
 
-*Add Session Description*
+Modern agents can fail in ways that traditional monitoring can't catch. In this hands-on lab, learn more about how Microsoft Foundry Observability helps you move from prototype to production - with context-specific evaluation suites (auto-generated evaluators + test datasets) wired into developer workflows via skills and MCP tooling for hosted agents. Scale quality with continuous evaluations, trace-linked analysis and adaptive red teaming - and walk away with a sandbox you can use to explore additional features at your own pace.
 
-### 🏫 Getting started in a guided session
+### Business Scenario
 
-To get started in a guided lab session:
-- <!-- step 1 -->
-- <!-- step 2 -->
-- <!-- step 3 -->
+Zava is a fictitious enterprise retailer that sells home improvement products to DIY enthusiasts. As sales grow, the team wants to build Cora - an AI-driven shopping assistant that can scale to meet customer demand and support in-store customer service requirements. This is a new product (with no pre-existing test datasets) and the team needs to ensure that agent responses are reliable, safe and high-quality even as demand scales and requirements change.
 
-### 🏠 Getting started in your own environment
 
-If you're following these steps at your own pace:
-- Clone this repository
-- Set up your development environment
-- <!-- step 3 -->
+### Learning Objectives
 
-### 🧠 Learning Outcomes
+In this hands-on lab, we'll see how the Microsoft Foundry Observability platform works with GitHub Copilot and Foundry skills, to simplify the developer experience and accelerate their progress from plan to prototype.
 
-By the end of this session, you will be able to:
+By completing this lab you will learn to:
 
-- <!-- outcome 1 -->
-- <!-- outcome 2 -->
-- <!-- outcome 3 -->
+1. Create and deploy a hosted agent using Azure Developer CLI
+1. Auto-generate test datasets and evaluators using the `observe` skill
+1. Activate the evaluate-optimize loop to iteratively improve agent
+1. Retrieve and analyze production insights to troubleshoot failures
+1. Explore new features like adaptive evaluations & optimization service
+
+
+### 🏫 Getting started 
+
+To complete this lab you must have:
+
+1. An Azure subscription 
+1. A GitHub account (with a GitHub Copilot subscription)
+1. Familiarity with Python, VS Code & Agentic AI lifecycles
+
+The repository is set up for use in both instructor-led (in-venue) and self-paced (at home) learning formats. Instructor-led sessions will provide an Azure subscription and GitHub account for your use. Self-paced sessions will require you to bring your own Azure and GitHub Copilot subscriptions.
+
+To get started, visit the [Workshop](./docs/README.md) guide and pick the path relevant to you.
+
+---
+
+<br/>
 
 ### 💬 Keep Learning with Copilot
 
@@ -107,10 +87,10 @@ For more information, setup instructions for other dev clients, and to post comm
 
 <table>
 <tr>
-    <td align="center"><a href="http://github.com/yourGitHubHandle">
-        <img src="https://github.com/yourGitHubHandle.png" width="100px;" alt="INSERT NAME HERE"/><br />
+    <td align="center"><a href="http://github.com/nitya">
+        <img src="https://github.com/nitya.png" width="100px;" alt="INSERT NAME HERE"/><br />
         <sub><b>INSERT NAME HERE</b></sub></a><br />
-            <a href="https://github.com/yourGitHubHandle" title="talk">📢</a>
+            <a href="https://github.com/nitya" title="talk">📢</a>
     </td>
 </tr></table>
 
