@@ -3,7 +3,9 @@
 kind: hosted
 name: zava-concierge
 description: |
-    An Agent Framework agent with local tools hosted by Foundry.
+  Zava Travel Concierge — a Microsoft Agent Framework orchestrator that delegates
+  to Flight, Hotel, and Car Rental specialist agents to plan complete itineraries
+  across Paris, London, Tokyo, Rome, and Cancún.
 metadata:
     tags:
         - Agent Framework

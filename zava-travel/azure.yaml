@@ -3,7 +3,7 @@
 requiredVersions:
     extensions:
         azure.ai.agents: '>=0.1.0-preview'
-name: ai-foundry-starter-basic
+name: zava-travel-concierge
 services:
     zava-concierge:
         project: src/zava-concierge
