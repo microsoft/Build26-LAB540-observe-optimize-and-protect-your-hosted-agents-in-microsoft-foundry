@@ -1,0 +1,263 @@
+#!/usr/bin/env bash
+# =======================================================================
+#  Microsoft Foundry Observability Workshop — Environment Configuration
+# =======================================================================
+#  This script:
+#    1. Checks Azure CLI login status (prompts az login if needed)
+#    2. Creates a .env file from sample.env (if it doesn't exist)
+#    3. Auto-populates values it can discover via Azure CLI
+#    4. Reports which values still need manual entry
+#
+#  Usage:
+#    chmod +x scripts/setup-env.sh
+#    ./scripts/setup-env.sh
+#
+#  Prerequisites:
+#    - Azure CLI (az) installed and logged in
+#    - A Microsoft Foundry project already created (see docs/README.md Module 0)
+# ============================================================
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+ENV_FILE="${REPO_ROOT}/.env"
+SAMPLE_FILE="${SCRIPT_DIR}/sample.env"
+
+# ── Colors ──
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+NC='\033[0m'
+
+echo ""
+echo -e "${CYAN}╔══════════════════════════════════════════════════════════╗${NC}"
+echo -e "${CYAN}║  🏕️ Foundry Observability Workshop — Environment Setup   ║${NC}"
+echo -e "${CYAN}╚══════════════════════════════════════════════════════════╝${NC}"
+echo ""
+
+# ────────────────────────────────────────────────────────────
+#  Step 1: Check Azure CLI login
+# ────────────────────────────────────────────────────────────
+echo -e "${BLUE}[1/5]${NC} Checking Azure CLI authentication..."
+
+if ! command -v az &> /dev/null; then
+    echo -e "${RED}  ✗ Azure CLI (az) is not installed.${NC}"
+    echo "    Install it: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli"
+    exit 1
+fi
+
+if az account show &> /dev/null; then
+    ACCOUNT_NAME=$(az account show --query "user.name" -o tsv 2>/dev/null || echo "unknown")
+    SUBSCRIPTION_NAME=$(az account show --query "name" -o tsv 2>/dev/null || echo "unknown")
+    echo -e "${GREEN}  ✓ Logged in as: ${ACCOUNT_NAME}${NC}"
+    echo -e "${GREEN}  ✓ Subscription: ${SUBSCRIPTION_NAME}${NC}"
+else
+    echo -e "${YELLOW}  ⚠ Not logged in to Azure CLI.${NC}"
+    echo -e "${YELLOW}    Running 'az login --use-device-code'...${NC}"
+    echo ""
+    az login --use-device-code || true
+    echo ""
+    if ! az account show &> /dev/null; then
+        echo -e "${RED}  ✗ Azure login failed. Please try again.${NC}"
+        exit 1
+    fi
+    ACCOUNT_NAME=$(az account show --query "user.name" -o tsv 2>/dev/null || echo "unknown")
+    SUBSCRIPTION_NAME=$(az account show --query "name" -o tsv 2>/dev/null || echo "unknown")
+    echo -e "${GREEN}  ✓ Login successful!${NC}"
+    echo -e "${GREEN}  ✓ Logged in as: ${ACCOUNT_NAME}${NC}"
+    echo -e "${GREEN}  ✓ Subscription: ${SUBSCRIPTION_NAME}${NC}"
+fi
+
+# ────────────────────────────────────────────────────────────
+#  Step 2: Create .env from sample.env if it doesn't exist
+# ────────────────────────────────────────────────────────────
+echo ""
+echo -e "${BLUE}[2/5]${NC} Checking .env file..."
+
+if [ ! -f "${SAMPLE_FILE}" ]; then
+    echo -e "${RED}  ✗ sample.env not found at: ${SAMPLE_FILE}${NC}"
+    echo "    Make sure you're running this script from the repository root."
+    exit 1
+fi
+
+if [ ! -f "${ENV_FILE}" ]; then
+    cp "${SAMPLE_FILE}" "${ENV_FILE}"
+    echo -e "${GREEN}  ✓ Created .env from sample.env${NC}"
+else
+    echo -e "${GREEN}  ✓ .env already exists (will update empty values)${NC}"
+    while IFS='=' read -r key value; do
+        [[ "${key}" =~ ^#.*$ ]] && continue
+        [[ -z "${key}" ]] && continue
+        if ! grep -q "^${key}=" "${ENV_FILE}" 2>/dev/null; then
+            echo "${key}=${value}" >> "${ENV_FILE}"
+            echo -e "${GREEN}  + Added new key: ${key}${NC}"
+        fi
+    done < <(grep "^[A-Z]" "${SAMPLE_FILE}")
+fi
+
+# ────────────────────────────────────────────────────────────
+#  Helper: set a value in .env only if currently empty
+# ────────────────────────────────────────────────────────────
+set_env_if_empty() {
+    local key="$1"
+    local value="$2"
+    if ! grep -q "^${key}=" "${ENV_FILE}" 2>/dev/null; then
+        echo "${key}=" >> "${ENV_FILE}"
+    fi
+    local current
+    current=$(grep "^${key}=" "${ENV_FILE}" | cut -d'=' -f2-)
+    if [ -z "${current}" ] && [ -n "${value}" ]; then
+        sed -i "s|^${key}=.*|${key}=\"${value}\"|" "${ENV_FILE}"
+        echo -e "${GREEN}  ✓ ${key} → ${value:0:60}${NC}"
+        return 0
+    elif [ -n "${current}" ]; then
+        echo -e "${GREEN}  ✓ ${key} already set${NC}"
+        return 0
+    else
+        return 1
+    fi
+}
+
+# ────────────────────────────────────────────────────────────
+#  Step 3: Auto-populate subscription info
+# ────────────────────────────────────────────────────────────
+echo ""
+echo -e "${BLUE}[3/5]${NC} Auto-populating subscription info..."
+
+SUB_ID=$(az account show --query "id" -o tsv 2>/dev/null || echo "")
+set_env_if_empty "AZURE_SUBSCRIPTION_ID" "${SUB_ID}" || true
+
+# ────────────────────────────────────────────────────────────
+#  Step 4: Discover resources in resource group
+# ────────────────────────────────────────────────────────────
+echo ""
+echo -e "${BLUE}[4/5]${NC} Resource group discovery..."
+
+# Check if resource group is already set
+EXISTING_RG=$(grep "^AZURE_RESOURCE_GROUP=" "${ENV_FILE}" | cut -d'=' -f2- | tr -d '"' || echo "")
+if [ -n "${EXISTING_RG}" ]; then
+    SELECTED_RG="${EXISTING_RG}"
+    echo -e "${GREEN}  ✓ Using resource group from .env: ${SELECTED_RG}${NC}"
+else
+    read -rp "  Enter your Azure resource group name: " SELECTED_RG
+    if [ -z "${SELECTED_RG}" ]; then
+        echo -e "${RED}  ✗ Resource group name cannot be empty.${NC}"
+        exit 1
+    fi
+fi
+
+if ! az group show --name "${SELECTED_RG}" &>/dev/null; then
+    echo -e "${RED}  ✗ Resource group '${SELECTED_RG}' not found.${NC}"
+    echo -e "${RED}    Check the name and subscription.${NC}"
+    exit 1
+fi
+
+echo -e "${GREEN}  ✓ Using resource group: ${SELECTED_RG}${NC}"
+set_env_if_empty "AZURE_RESOURCE_GROUP" "${SELECTED_RG}" || true
+
+# ── Find AI Services account ──
+ACCOUNT_AI=$(az cognitiveservices account list \
+    --resource-group "${SELECTED_RG}" \
+    --query "[?kind=='AIServices' || kind=='OpenAI'] | [0].name" \
+    -o tsv 2>/dev/null || echo "")
+
+if [ -z "${ACCOUNT_AI}" ]; then
+    echo -e "${YELLOW}  ⚠ No AI Services accounts found in '${SELECTED_RG}'.${NC}"
+    echo -e "${YELLOW}    Set AZURE_AI_PROJECT_ENDPOINT manually in .env${NC}"
+else
+    echo -e "${GREEN}  ✓ AI Services account: ${ACCOUNT_AI}${NC}"
+
+    # ── Find Foundry project endpoint ──
+    PROJECT_ENDPOINTS=$(az cognitiveservices account project list \
+        --name "${ACCOUNT_AI}" \
+        --resource-group "${SELECTED_RG}" \
+        --query '[].properties.endpoints."AI Foundry API"' -o tsv 2>/dev/null || echo "")
+
+    if [ -n "${PROJECT_ENDPOINTS}" ]; then
+        PROJECT_COUNT=$(echo "${PROJECT_ENDPOINTS}" | wc -l)
+        if [ "${PROJECT_COUNT}" -eq 1 ]; then
+            PROJECT_ENDPOINT=$(echo "${PROJECT_ENDPOINTS}" | head -1)
+            PROJECT_ENDPOINT="${PROJECT_ENDPOINT%/}"
+            echo -e "${GREEN}  ✓ Foundry project endpoint: ${PROJECT_ENDPOINT}${NC}"
+        else
+            echo -e "${YELLOW}  Multiple projects found:${NC}"
+            echo "${PROJECT_ENDPOINTS}" | while read -r p; do echo "     • $p"; done
+            read -rp "  Enter the full project endpoint to use: " PROJECT_ENDPOINT
+            PROJECT_ENDPOINT="${PROJECT_ENDPOINT%/}"
+        fi
+        set_env_if_empty "AZURE_AI_PROJECT_ENDPOINT" "${PROJECT_ENDPOINT}" || true
+    else
+        echo -e "${YELLOW}  ⚠ No Foundry project found. Set AZURE_AI_PROJECT_ENDPOINT manually.${NC}"
+    fi
+fi
+
+# ── Find Azure Container Registry ──
+ACR_NAME=$(az acr list \
+    --resource-group "${SELECTED_RG}" \
+    --query "[0].name" \
+    -o tsv 2>/dev/null || echo "")
+
+if [ -n "${ACR_NAME}" ]; then
+    echo -e "${GREEN}  ✓ Container Registry: ${ACR_NAME}${NC}"
+    set_env_if_empty "AZURE_CONTAINER_REGISTRY_NAME" "${ACR_NAME}" || true
+else
+    echo -e "${YELLOW}  ⚠ No ACR found in '${SELECTED_RG}'. Set AZURE_CONTAINER_REGISTRY_NAME manually.${NC}"
+fi
+
+# ── Find Application Insights ──
+az extension add --name application-insights --yes 2>/dev/null || true
+APPINSIGHTS_CS=$(az resource list \
+    --resource-group "${SELECTED_RG}" \
+    --resource-type "Microsoft.Insights/components" \
+    --query "[0].name" \
+    -o tsv 2>/dev/null || echo "")
+
+if [ -n "${APPINSIGHTS_CS}" ]; then
+    CS=$(az monitor app-insights component show \
+        --app "${APPINSIGHTS_CS}" \
+        --resource-group "${SELECTED_RG}" \
+        --query "connectionString" \
+        -o tsv 2>/dev/null || echo "")
+    if [ -n "${CS}" ]; then
+        echo -e "${GREEN}  ✓ Application Insights: ${APPINSIGHTS_CS}${NC}"
+        set_env_if_empty "TELEMETRY_CONNECTION_STRING" "${CS}" || true
+    fi
+else
+    echo -e "${YELLOW}  ⚠ No Application Insights found. Trace analysis will be unavailable.${NC}"
+fi
+
+# ────────────────────────────────────────────────────────────
+#  Step 5: Summary
+# ────────────────────────────────────────────────────────────
+echo ""
+echo -e "${BLUE}[5/5]${NC} Checking .env completeness..."
+echo ""
+
+MISSING=0
+while IFS='=' read -r key _; do
+    [[ "${key}" =~ ^#.*$ ]] && continue
+    [[ -z "${key}" ]] && continue
+    current=$(grep "^${key}=" "${ENV_FILE}" | cut -d'=' -f2- | tr -d '"' || echo "")
+    if [ -z "${current}" ]; then
+        echo -e "${YELLOW}  ○ ${key} — still needs a value${NC}"
+        MISSING=$((MISSING + 1))
+    fi
+done < <(grep "^[A-Z]" "${SAMPLE_FILE}")
+
+echo ""
+if [ "${MISSING}" -eq 0 ]; then
+    echo -e "${GREEN}  ✅ All environment variables are set!${NC}"
+else
+    echo -e "${YELLOW}  ⚠ ${MISSING} variable(s) still need manual entry.${NC}"
+    echo -e "${YELLOW}    Edit .env and fill in the missing values.${NC}"
+fi
+
+echo ""
+echo -e "${CYAN}──────────────────────────────────────────────────────────${NC}"
+echo -e "${CYAN}  Your .env file is at: ${ENV_FILE}${NC}"
+echo -e "${CYAN}  Next: open docs/README.md and start Module 1${NC}"
+echo -e "${CYAN}──────────────────────────────────────────────────────────${NC}"
+echo ""
