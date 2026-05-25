@@ -29,17 +29,35 @@ By completing this lab you will learn to:
 1. Explore new features like adaptive evaluations & optimization service
 
 
-### 🏫 Getting started 
+### 🏫 Getting started
 
 To complete this lab you must have:
 
-1. An Azure subscription 
+1. An Azure subscription
 1. A GitHub account (with a GitHub Copilot subscription)
 1. Familiarity with Python, VS Code & Agentic AI lifecycles
 
-_An Azure subscription and GitHub Copilot subscription will be provided to in-venue attendees. Self-guided learners should bring their own_.
+_An Azure subscription and GitHub Copilot subscription are provided to
+in-venue attendees. Self-guided learners should bring their own._
 
-To get started, visit the [Workshop](./workshop/docs/README.md) guide and pick the path relevant to you.
+There are **two paths** through this lab — pick the one that matches how
+you're taking it:
+
+| Path | For | Start Here |
+|------|-----|------------|
+| 🏫 **Skillable** (in-venue) | Build attendees — Azure RG and Foundry agent are pre-provisioned for you | [`workshop/docs/00-setup/skillable/`](./workshop/docs/00-setup/skillable/README.md) |
+| 🏠 **Self-Guided** (at-home) | You'll provision everything yourself with `azd up` | [`workshop/docs/00-setup/self-guided/`](./workshop/docs/00-setup/self-guided/README.md) |
+
+Both paths converge at the [shared setup steps](./workshop/docs/00-setup/shared/README.md)
+once you have a Codespace open and an Azure resource group available.
+
+For the full workshop walkthrough — including the CORE labs and MORE
+deep-dives — see the [Workshop guide](./workshop/docs/README.md).
+
+> 💡 **Prefer Copilot-driven setup?** With the workshop skills installed,
+> open Copilot Chat and ask *"Run the workshop"* — the
+> [`run-workshop`](./.agents/skills/run-workshop/SKILL.md) skill detects
+> your path, walks you through each step, and tracks progress for you.
 
 ---
 

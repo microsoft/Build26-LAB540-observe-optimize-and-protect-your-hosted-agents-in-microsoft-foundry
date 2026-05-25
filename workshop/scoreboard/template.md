@@ -2,7 +2,7 @@
 
 **Agent**: Zava Travel Concierge
 **Date**: ___________
-**Path**: [ ] Skillable  [ ] Self-paced
+**Path**: [ ] Skillable  [ ] Self-Guided
 
 ---
 

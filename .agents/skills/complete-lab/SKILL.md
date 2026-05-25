@@ -27,6 +27,23 @@ A lab identifier. Valid values:
 - `tracing` — MORE: Trace-Linked Analysis
 - `prompt-optimizer` — MORE: Prompt Optimization
 
+## Interaction Style — Guide, Don't Do
+
+The learner runs every command. This skill orchestrates; the learner
+executes. Follow the same conventions as the
+[`run-workshop`](../run-workshop/SKILL.md) skill:
+
+- One command at a time, learner pastes output back, you validate.
+- Don't auto-dispatch terminal commands unless the learner explicitly
+  asks ("just do it" / "run it for me").
+- After each major substep, render an achievement banner:
+  ```
+  ✅ Step <ID>: <short name>
+     <one-line summary>
+  ```
+- Capture `Feedback:` messages to `.do_not_commit/FEEDBACK.runN.md`
+  and continue; don't act on them mid-run.
+
 ## Behavior
 
 1. **Identify the lab**: Parse the learner's request to determine which lab they want.

@@ -37,7 +37,7 @@ Deeper explorations of individual Foundry Observability capabilities:
 | Path | Audience | Lab 1 Experience |
 |------|----------|------------------|
 | **Skillable** | In-venue attendees | Agent is pre-deployed; skip to validation exercises |
-| **Self-paced** | At-home learners | Deploy the agent yourself with `azd up`, then validate |
+| **Self-Guided** | At-home learners | Deploy the agent yourself with `azd up`, then validate |
 
 Both paths converge at the same checkpoint before Lab 2.
 
@@ -131,6 +131,6 @@ The agent root (`zava/src/zava-travel-concierge/.foundry/`) is pre-configured wi
 
 ## Prerequisites
 
-- Azure subscription (provided in-venue via Skillable, bring-your-own for self-paced)
+- Azure subscription (provided in-venue via Skillable, bring-your-own for self-guided)
 - GitHub account with Copilot subscription
 - Familiarity with Python, VS Code, and agentic AI concepts

@@ -13,6 +13,24 @@ The learner says something like:
 - "This isn't working"
 - "Why did this fail?"
 
+## Interaction Style — Guide, Don't Do
+
+The learner runs every diagnostic command and applies every fix. Follow
+the same conventions as the
+[`run-workshop`](../run-workshop/SKILL.md) skill:
+
+- Dictate one diagnostic command at a time, learner runs it and pastes
+  back the output, you interpret.
+- Don't auto-dispatch terminal commands unless the learner explicitly
+  asks ("just do it" / "run it for me").
+- After resolving the blocker, render:
+  ```
+  ✅ Blocker resolved: <short summary>
+     Returning you to <step ID>.
+  ```
+- Capture `Feedback:` messages to `.do_not_commit/FEEDBACK.runN.md`
+  and continue.
+
 ## Behavior
 
 1. **Gather context**: Ask the learner to share:

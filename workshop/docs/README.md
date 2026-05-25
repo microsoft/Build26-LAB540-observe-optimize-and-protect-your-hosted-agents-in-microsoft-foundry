@@ -10,15 +10,16 @@ You'll take the **Zava Travel Concierge** (a multi-agent travel planning system)
 
 | Path | For | Start Here |
 |------|-----|------------|
-| 🏫 **Skillable** (in-venue) | Build attendees with a provided Azure subscription | [Skillable Setup](./00-setup/skillable.md) |
-| 🏠 **Self-paced** (at-home) | Learners with their own Azure + GitHub Copilot subscription | [Self-paced Setup](./00-setup/self-paced.md) |
+| 🏫 **Skillable** (in-venue) | Build attendees with a provided Azure subscription | [Skillable Setup](./00-setup/skillable/README.md) |
+| 🏠 **Self-Guided** (at-home) | Learners with their own Azure + GitHub Copilot subscription | [Self-Guided Setup](./00-setup/self-guided/README.md) |
 
 ## Workshop Structure
 
-### CORE (60 minutes)
+### CORE (~75 minutes)
 
 | # | Lab | Description |
 |---|-----|-------------|
+| 0 | [Setup](./core/lab-0.md) | Copilot-assisted Lab 0 — environment ready, hosted agent provisioned, `.env` populated |
 | 1 | [Deploy & Validate](./core/lab-1.md) | Get the hosted agent running and confirm it works |
 | 2 | [Observe & Evaluate](./core/lab-2.md) | Auto-generate test data, evaluate, get recommendations |
 | 3 | [Optimize & Verify](./core/lab-3.md) | Fix the agent, redeploy, prove improvement |

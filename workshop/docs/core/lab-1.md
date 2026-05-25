@@ -6,11 +6,11 @@ Deploy the Zava Travel Concierge as a hosted agent on Microsoft Foundry and vali
 
 ## Time Estimate
 
-~15 minutes (self-paced path includes deployment; Skillable path skips to validation)
+~15 minutes (self-guided path includes deployment; Skillable path skips to validation)
 
 ---
 
-## Path: Self-Paced (Deploy from Scratch)
+## Path: Self-Guided (Deploy from Scratch)
 
 > **Skillable attendees**: Your agent is pre-deployed. Skip to [Validate the Agent](#validate-the-agent) below.
 
@@ -59,7 +59,7 @@ Wait for deployment to complete (typically 3–5 minutes during `azd up`).
 
 ## Validate the Agent
 
-Both paths (Skillable and Self-paced) continue here.
+Both paths (Skillable and Self-Guided) continue here.
 
 ### Step 1.4: Open Microsoft Foundry Portal
 

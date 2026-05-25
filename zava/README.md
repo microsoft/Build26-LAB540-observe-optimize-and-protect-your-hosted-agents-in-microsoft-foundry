@@ -11,7 +11,7 @@ observe, evaluate, and optimize during the workshop.
 >
 > 1. **Just deploy it** — `azd up` from inside `zava/` provisions the
 >    Azure resources, builds the container, pushes it, and publishes the
->    agent to Foundry in one command. This is what the workshop self-paced
+>    agent to Foundry in one command. This is what the workshop self-guided
 >    path uses.
 > 2. **Read the code** — use it as a reference for how to wire a
 >    multi-agent system into the Foundry hosting runtime with the

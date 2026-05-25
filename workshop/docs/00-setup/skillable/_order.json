@@ -1,0 +1,9 @@
+{
+  "lab_title_token": "@lab.Title",
+  "pages": [
+    { "file": "00-welcome.md", "title": "Welcome to LAB540" },
+    { "file": "01-open-codespace.md", "title": "Open your Codespace" },
+    { "file": "02-discover-env.md", "title": "Populate the .env file" },
+    { "file": "03-three-tabs.md", "title": "Open the three browser tabs" }
+  ]
+}
