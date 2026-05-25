@@ -13,8 +13,25 @@ Modern agents can fail in ways that traditional monitoring can't catch. In this 
 
 ### Business Scenario
 
-Zava Travel is a fictitious premium travel agency specializing in international travel experiences. The team has built the Zava Travel Concierge — an AI-powered multi-agent system that orchestrates specialist agents for flights, hotels, and car rentals to plan complete itineraries. This is a new product (with no pre-existing test datasets) and the team needs to ensure that agent responses are reliable, safe and high-quality even as demand scales and requirements change.
+Zava Travel is a fictitious premium travel agency specializing in international travel experiences. The team has built the Zava Travel Concierge — an AI-powered multi-agent system that orchestrates specialist agents for flights, hotels, and car rentals to plan complete itineraries. The Concierge does *not* answer questions from its own knowledge — it delegates to these specialist sub-agents, each of which owns one CSV data source and exposes typed Python tools to query it. This is a new agent (with no pre-existing test datasets) and the team needs to ensure that agent responses are reliable, safe and high-quality even as demand scales and requirements change.
 
+```mermaid
+flowchart LR
+    User([Traveler])
+    Concierge[Zava Concierge<br/>orchestrator]
+    Flights[Flight Specialist<br/>flights.csv]
+    Hotels[Hotel Specialist<br/>hotels.csv]
+    Cars[Car Rental Specialist<br/>car_rentals.csv]
+
+    User -- "Plan a trip to Rome" --> Concierge
+    Concierge -- "search flights" --> Flights
+    Concierge -- "search hotels" --> Hotels
+    Concierge -- "search cars" --> Cars
+    Flights -- results --> Concierge
+    Hotels -- results --> Concierge
+    Cars -- results --> Concierge
+    Concierge -- itinerary --> User
+```
 
 ### Learning Objectives
 
@@ -27,6 +44,16 @@ By completing this lab you will learn to:
 1. Activate the evaluate-optimize loop to iteratively improve agent
 1. Retrieve and analyze production insights to troubleshoot failures
 1. Explore new features like adaptive evaluations & optimization service
+
+
+> 📝 **A note on outcomes.** Every learner walks through the **same workflow**
+> and the **same skills** — but the specific scores, evaluator
+> recommendations, and optimized prompts you see will **differ from
+> other learners and from run to run**. Agent responses are
+> non-deterministic, sample sizes are small (n ≈ 10), and the prompt
+> optimizer generates a fresh hypothesis each pass. Focus on learning
+> the loop and how to interpret what you see — not on matching anyone
+> else's numbers.
 
 
 ### 🏫 Getting started
