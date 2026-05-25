@@ -147,7 +147,7 @@ All four lines should print a non-empty value.
 > The script writes these variables: `AZURE_SUBSCRIPTION_ID`,
 > `AZURE_RESOURCE_GROUP`, `AZURE_LOCATION`,
 > `AZURE_AI_PROJECT_ENDPOINT`, `AZURE_AI_MODEL_DEPLOYMENT_NAME`,
-> `AZURE_CONTAINER_REGISTRY_NAME`, `TELEMETRY_CONNECTION_STRING`,
+> `AZURE_CONTAINER_REGISTRY_NAME`, `APPLICATIONINSIGHTS_CONNECTION_STRING`,
 > and `FOUNDRY_AGENT_ID`.
 
 > [!Alert] .env is gitignored
@@ -174,7 +174,7 @@ integrated terminal visible — most lab steps run there.
 
 In your Codespace terminal, print your Foundry portal link:
 
-++PROJECT_NAME="${AZURE_AI_PROJECT_ENDPOINT#https://}"; PROJECT_NAME="${PROJECT_NAME%%.*}"; echo "https://ai.azure.com/build/overview?wsid=/subscriptions/${AZURE_SUBSCRIPTION_ID}/resourceGroups/${AZURE_RESOURCE_GROUP}/providers/Microsoft.CognitiveServices/accounts/${PROJECT_NAME}"++
+++echo "$FOUNDRY_PORTAL_URL"++
 
 Copy the URL it prints and open it in a new browser tab. Sign in with
 the same account you're using for Azure CLI.
@@ -191,7 +191,7 @@ You should see:
 
 Print the direct link to your resource group:
 
-++echo "https://portal.azure.com/#@/resource/subscriptions/${AZURE_SUBSCRIPTION_ID}/resourceGroups/${AZURE_RESOURCE_GROUP}/overview"++
+++echo "$AZURE_PORTAL_RG_URL"++
 
 Open the URL in another new tab. Sign in with the Azure portal
 credentials from the **Resources** tab:

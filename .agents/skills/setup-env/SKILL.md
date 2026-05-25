@@ -212,7 +212,8 @@ The `.env` at the repo root should contain (all populated by
 - `AZURE_AI_PROJECT_ENDPOINT`
 - `AZURE_AI_MODEL_DEPLOYMENT_NAME` (default `gpt-4.1-mini`)
 - `AZURE_CONTAINER_REGISTRY_NAME`
-- `TELEMETRY_CONNECTION_STRING` (Application Insights)
+- `AZURE_CONTAINER_REGISTRY_LOGIN_SERVER`
+- `APPLICATIONINSIGHTS_CONNECTION_STRING` (Application Insights — used by Lab 4 tracing)
 - `FOUNDRY_AGENT_ID`
 
 ## Related Docs

@@ -10,31 +10,27 @@ most lab steps run there.
 
 ## Tab 2 — Microsoft Foundry portal
 
-Open your Foundry project in the browser.
-
-**Self-Guided**: `azd up` printed a Foundry portal link at the end.
-Open it.
-
-**Skillable**: The portal URL is embedded in your `.env`:
+Open your Foundry project in the browser. The discover script already
+stashed a direct link in your `.env`:
 
 ```bash
-# Print the portal URL derived from your project endpoint
-PROJECT_NAME="${AZURE_AI_PROJECT_ENDPOINT#https://}"
-PROJECT_NAME="${PROJECT_NAME%%.*}"
-echo "https://ai.azure.com/build/overview?wsid=/subscriptions/${AZURE_SUBSCRIPTION_ID}/resourceGroups/${AZURE_RESOURCE_GROUP}/providers/Microsoft.CognitiveServices/accounts/${PROJECT_NAME}"
+echo "$FOUNDRY_PORTAL_URL"
 ```
 
-Sign in with the same account you used for `az login`. You should see
-your project, the `gpt-4.1-mini` deployment, and the **Agents** section
-listing the Zava Travel Concierge.
+Copy the URL and open it in a new tab. Sign in with the same account
+you used for `az login`. You should see your project, the
+`gpt-4.1-mini` deployment, and the **Agents** section listing the
+Zava Travel Concierge.
+
+> **Self-Guided heads-up**: `azd up` also printed a portal link at the
+> end of provisioning — either link works.
 
 ## Tab 3 — Azure Portal
 
-Open <https://portal.azure.com>, sign in, and pin your resource group:
+Open the direct link to your resource group:
 
 ```bash
-# Print the direct RG link
-echo "https://portal.azure.com/#@/resource/subscriptions/${AZURE_SUBSCRIPTION_ID}/resourceGroups/${AZURE_RESOURCE_GROUP}/overview"
+echo "$AZURE_PORTAL_RG_URL"
 ```
 
 You'll use this to check **Application Insights** traces and **Azure

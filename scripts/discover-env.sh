@@ -267,6 +267,15 @@ ACR_NAME=$(az acr list \
 if [ -n "${ACR_NAME}" ]; then
     echo -e "${GREEN}  ✓ Container Registry: ${ACR_NAME}${NC}"
     set_env_if_empty "AZURE_CONTAINER_REGISTRY_NAME" "${ACR_NAME}" || true
+    # Also write the login server (FQDN) — needed for docker tag/push.
+    ACR_LOGIN_SERVER=$(az acr show \
+        --name "${ACR_NAME}" \
+        --resource-group "${SELECTED_RG}" \
+        --query "loginServer" \
+        -o tsv 2>/dev/null || echo "")
+    if [ -n "${ACR_LOGIN_SERVER}" ]; then
+        set_env_if_empty "AZURE_CONTAINER_REGISTRY_LOGIN_SERVER" "${ACR_LOGIN_SERVER}" || true
+    fi
 else
     echo -e "${YELLOW}  ⚠ No ACR found in '${SELECTED_RG}'. Set AZURE_CONTAINER_REGISTRY_NAME manually.${NC}"
 fi
@@ -287,10 +296,28 @@ if [ -n "${APPINSIGHTS_CS}" ]; then
         -o tsv 2>/dev/null || echo "")
     if [ -n "${CS}" ]; then
         echo -e "${GREEN}  ✓ Application Insights: ${APPINSIGHTS_CS}${NC}"
-        set_env_if_empty "TELEMETRY_CONNECTION_STRING" "${CS}" || true
+        set_env_if_empty "APPLICATIONINSIGHTS_CONNECTION_STRING" "${CS}" || true
     fi
 else
     echo -e "${YELLOW}  ⚠ No Application Insights found. Trace analysis will be unavailable.${NC}"
+fi
+
+# ── Derive convenience URLs (Foundry portal, Azure portal RG) ──
+# These are computed from the values discovered above so users don't
+# have to assemble URLs by hand or paste multi-line shell snippets.
+PROJECT_HOST=$(grep "^AZURE_AI_PROJECT_ENDPOINT=" "${ENV_FILE}" | cut -d'=' -f2- | tr -d '"' | sed -E 's#^https?://##' | cut -d'/' -f1 || echo "")
+PROJECT_ACCT="${PROJECT_HOST%%.*}"
+SUB_ID_VAL=$(grep "^AZURE_SUBSCRIPTION_ID=" "${ENV_FILE}" | cut -d'=' -f2- | tr -d '"' || echo "")
+RG_VAL=$(grep "^AZURE_RESOURCE_GROUP=" "${ENV_FILE}" | cut -d'=' -f2- | tr -d '"' || echo "")
+
+if [ -n "${PROJECT_ACCT}" ] && [ -n "${SUB_ID_VAL}" ] && [ -n "${RG_VAL}" ]; then
+    FOUNDRY_URL="https://ai.azure.com/build/overview?wsid=/subscriptions/${SUB_ID_VAL}/resourceGroups/${RG_VAL}/providers/Microsoft.CognitiveServices/accounts/${PROJECT_ACCT}"
+    set_env_if_empty "FOUNDRY_PORTAL_URL" "${FOUNDRY_URL}" || true
+fi
+
+if [ -n "${SUB_ID_VAL}" ] && [ -n "${RG_VAL}" ]; then
+    AZ_PORTAL_URL="https://portal.azure.com/#@/resource/subscriptions/${SUB_ID_VAL}/resourceGroups/${RG_VAL}/overview"
+    set_env_if_empty "AZURE_PORTAL_RG_URL" "${AZ_PORTAL_URL}" || true
 fi
 
 # ────────────────────────────────────────────────────────────

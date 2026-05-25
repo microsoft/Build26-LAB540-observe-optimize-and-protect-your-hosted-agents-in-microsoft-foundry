@@ -63,8 +63,8 @@ After making changes, deploy the updated agent:
 # Rebuild and push the updated image
 cd zava/src/zava-travel-concierge
 docker build -t zava-concierge:latest .
-docker tag zava-concierge:latest $ACR_LOGIN_SERVER/zava-concierge:v2
-docker push $ACR_LOGIN_SERVER/zava-concierge:v2
+docker tag zava-concierge:latest $AZURE_CONTAINER_REGISTRY_LOGIN_SERVER/zava-concierge:v2
+docker push $AZURE_CONTAINER_REGISTRY_LOGIN_SERVER/zava-concierge:v2
 
 # Redeploy
 cd /workspaces/Build26-LAB540-fork

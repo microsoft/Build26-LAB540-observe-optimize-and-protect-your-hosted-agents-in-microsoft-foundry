@@ -20,6 +20,19 @@ some Skillable-specific tokens (like `++copy text++`, `+++type text+++`,
 and `@lab.X` placeholders) that only become interactive inside the
 Skillable VM.
 
+> **Reviewing in VS Code preview?** Two Skillable-specific syntaxes
+> render oddly in standard markdown previewers:
+>
+> - `<[text](url)` — Skillable's "open in portal window" link. Markdown
+>   previewers eat the leading `<` and may garble brackets. In Skillable
+>   Studio it renders as a proper portal-window link.
+> - `++copy text++` / `+++type text+++` — Skillable's clickable
+>   copy/type-to-terminal blocks. Markdown previewers show them as
+>   literal `++…++` text. In Skillable Studio they become buttons.
+>
+> If you see weird formatting in VS Code preview, that's expected —
+> trust the paste-ready bundle and let Skillable Studio render it.
+
 | # | Page | What it covers |
 |---|------|----------------|
 | 1 | [00-welcome.md](./00-welcome.md) | Welcome, what's pre-provisioned, how Skillable instruction syntax works |

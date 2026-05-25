@@ -63,8 +63,8 @@ Then redeploy and re-evaluate:
 ```bash
 cd zava/src/zava-travel-concierge
 docker build -t zava-concierge:latest .
-docker tag zava-concierge:latest $ACR_LOGIN_SERVER/zava-concierge:v3
-docker push $ACR_LOGIN_SERVER/zava-concierge:v3
+docker tag zava-concierge:latest $AZURE_CONTAINER_REGISTRY_LOGIN_SERVER/zava-concierge:v3
+docker push $AZURE_CONTAINER_REGISTRY_LOGIN_SERVER/zava-concierge:v3
 
 cd /workspaces/Build26-LAB540-fork
 azd up
