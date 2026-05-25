@@ -60,7 +60,7 @@ The optimizer will:
 > can return mojibake (e.g. `—` → `â€”`). Before pasting the optimized text
 > into `main.py`, scan for garbled characters and fix them. To avoid this
 > entirely, keep `CONCIERGE_INSTRUCTIONS` ASCII-only as your seed. See
-> [troubleshooting.md](../troubleshooting.md#prompt_optimize-returns-instructions-with-garbled--mojibake-characters).
+> [TROUBLESHOOTING.md](../TROUBLESHOOTING.md#prompt_optimize-returns-instructions-with-garbled--mojibake-characters).
 
 ## Step 3.3: Redeploy the Agent
 
