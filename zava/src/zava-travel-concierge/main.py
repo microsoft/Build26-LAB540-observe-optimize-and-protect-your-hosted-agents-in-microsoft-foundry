@@ -144,6 +144,28 @@ def _make_client() -> FoundryChatClient:
     )
 
 
+# ============================================================================
+# WORKSHOP SAFETY NOTE — DO NOT COMMIT EDITS TO CONCIERGE_INSTRUCTIONS
+# ============================================================================
+# This string is the seed agent prompt that ships with the workshop. In
+# Lab 3 you will edit it locally to test optimizations, then redeploy
+# with `azd deploy` to evaluate the change.
+#
+# Those edits are EXPERIMENTAL and per-learner. They must stay in your
+# working tree only. If you `git add` and `git commit` this file with
+# your changes:
+#   - Other learners pulling the workshop will inherit your hypothesis
+#     as their starting point.
+#   - The baseline-vs-optimized comparison flow in Lab 3 breaks (because
+#     "baseline" is no longer the seed).
+#
+# Before committing anything in zava/src/zava-travel-concierge/, run:
+#     git diff main.py
+# and confirm CONCIERGE_INSTRUCTIONS is unchanged from the template.
+# If you intentionally want to update the seed (e.g. as a workshop
+# maintainer), open a PR and call that out explicitly in the description.
+# ============================================================================
+
 CONCIERGE_INSTRUCTIONS = """You are the **Zava Travel Concierge**, the single AI assistant that travelers
 talk to at Zava Travel — a premium agency that books flights, hotels, and car
 rentals across Paris, London, Tokyo, Rome, and Cancún.
