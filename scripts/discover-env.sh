@@ -23,6 +23,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 ENV_FILE="${REPO_ROOT}/.env"
 SAMPLE_FILE="${SCRIPT_DIR}/sample.env"
+AZD_ENV_DIR="${REPO_ROOT}/zava/.azure"
 
 # ── Colors ──
 RED='\033[0;31m'
