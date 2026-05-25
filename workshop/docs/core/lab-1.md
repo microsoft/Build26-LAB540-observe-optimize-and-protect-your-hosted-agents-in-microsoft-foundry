@@ -10,6 +10,34 @@ Deploy the Zava Travel Concierge as a hosted agent on Microsoft Foundry and vali
 
 ---
 
+## Agent at a Glance
+
+Before you deploy, here's what you're about to bring up:
+
+```
+             User prompt
+                 │
+                 ▼
+    ┌──────────────────────────┐
+    │  zava-concierge (host)   │ ← hosted agent, gpt-4.1-mini
+    │  CONCIERGE_INSTRUCTIONS  │    routes + composes itinerary
+    └─┬──────┬────────────┬───┘
+      │      │              │
+      ▼      ▼              ▼
+  flight_   hotel_       car_rental_   ← specialist sub-agents
+  agent     agent        agent            (each wraps a @tool fn)
+      │      │              │
+      ▼      ▼              ▼
+  flights.csv hotels.csv car_rentals.csv   ← grounding data
+```
+
+All five pieces live in `zava/src/zava-travel-concierge/main.py`. The agent
+is containerized (Dockerfile in the same folder), pushed to ACR, and run as
+a Foundry hosted agent. You'll see all of this in Lab 2 when you trace a
+call end-to-end.
+
+---
+
 ## Path: Self-Guided (Deploy from Scratch)
 
 > **Skillable attendees**: Your agent is pre-deployed. Skip to [Validate the Agent](#validate-the-agent) below.

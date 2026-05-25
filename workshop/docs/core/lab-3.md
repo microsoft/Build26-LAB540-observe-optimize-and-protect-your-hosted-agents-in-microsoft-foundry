@@ -55,23 +55,29 @@ The optimizer will:
 2. Generate an improved version of the instructions
 3. Show you the diff for approval
 
+> **⚠️ Unicode gotcha.** If your current instructions contain em-dashes (`—`),
+> smart quotes, bullet characters, or emoji, the optimizer's JSON round-trip
+> can return mojibake (e.g. `—` → `â€”`). Before pasting the optimized text
+> into `main.py`, scan for garbled characters and fix them. To avoid this
+> entirely, keep `CONCIERGE_INSTRUCTIONS` ASCII-only as your seed. See
+> [troubleshooting.md](../troubleshooting.md#prompt_optimize-returns-instructions-with-garbled--mojibake-characters).
+
 ## Step 3.3: Redeploy the Agent
 
-After making changes, deploy the updated agent:
+After editing `CONCIERGE_INSTRUCTIONS` in
+`zava/src/zava-travel-concierge/main.py`, redeploy with the bare
+`azd deploy` command — it skips infra provisioning and just rebuilds +
+pushes the container, then publishes a new hosted-agent revision:
 
 ```bash
-# Rebuild and push the updated image
-cd zava/src/zava-travel-concierge
-docker build -t zava-concierge:latest .
-docker tag zava-concierge:latest $AZURE_CONTAINER_REGISTRY_LOGIN_SERVER/zava-concierge:v2
-docker push $AZURE_CONTAINER_REGISTRY_LOGIN_SERVER/zava-concierge:v2
-
-# Redeploy
-cd /workspaces/Build26-LAB540-fork
-azd up
+cd zava
+azd deploy
 ```
 
-Wait for the new version to be live.
+When it finishes, ask Copilot or check the Foundry portal to confirm the
+new version is **Active**:
+
+> "What's the current version of my hosted agent?"
 
 ## Step 3.4: Re-Run Evaluation
 
@@ -87,21 +93,30 @@ Ask Copilot to compare the before and after:
 
 > "Compare my evaluation results — show me what improved"
 
-You should see improvement in the metrics targeted by the optimization. For example:
-- Groundedness scores increase if you added grounding rules
-- Relevance scores increase if you improved delegation logic
-- Safety scores remain stable (regression check)
+The comparison produces an **EvaluationComparison insight** in Foundry
+with per-metric deltas and p-values. Likely shapes you'll see:
+
+- A metric the optimizer targeted moves up
+- A *different* metric moves down (the tradeoff)
+- Most p-values come back as `TooFewSamples` or `Inconclusive` — that's
+  the n≈10 sample-size reality, not a bug
+
+> **The optimizer is a hypothesis generator, not an oracle.** A regression
+> after optimization is **data**, not failure — it tells you which axis you
+> traded off. Decide whether the tradeoff is acceptable, then iterate.
 
 ## Step 3.6: Update Your Scoreboard
 
-Record your improved metrics:
+Record your improved metrics in `workshop/scoreboard/<your-name>.md`
+(see [template](../../scoreboard/template.md)). Rows match the Phase 1
+evaluators:
 
 | Metric | Baseline (Lab 2) | After Optimization (Lab 3) | Change |
 |--------|-----------------|---------------------------|--------|
-| Relevance | _your score_ | _your score_ | ↑ |
-| Groundedness | _your score_ | _your score_ | ↑ |
-| Safety | _your score_ | _your score_ | — |
-| Overall | _your score_ | _your score_ | ↑ |
+| task_completion | _your score_ | _your score_ | ↑ / ↓ / = |
+| coherence | _your score_ | _your score_ | ↑ / ↓ / = |
+| indirect_attack | _your score_ | _your score_ | ↑ / ↓ / = |
+| Overall pass rate | _your score_ | _your score_ | ↑ / ↓ / = |
 
 ## Step 3.7: Reflect
 
@@ -112,7 +127,22 @@ You've completed one full iteration of the **observe → evaluate → optimize �
 3. **Optimize** — Apply data-driven recommendations
 4. **Verify** — Prove improvement with the same tests
 
-Each pass through this loop makes your agent measurably better.
+Each pass through this loop teaches you something about your agent.
+Improvement is **not** guaranteed on every pass — the value is in the
+feedback signal, which lets you make the next change more informed.
+
+## Step 3.8: (Optional) Cleanup
+
+If you're done experimenting and want to free up Azure cost:
+
+```bash
+cd zava
+azd down --purge
+```
+
+The `--purge` flag also removes soft-deleted Foundry resources so the
+name is immediately reusable. Skip this if you plan to continue with
+the MORE labs — you'll want the agent still deployed.
 
 ---
 
@@ -121,7 +151,7 @@ Each pass through this loop makes your agent measurably better.
 Before moving to Lab 4, confirm:
 - [ ] Agent instructions were updated based on recommendations
 - [ ] New version deployed successfully
-- [ ] Re-evaluation shows improvement in targeted metrics
+- [ ] Re-evaluation comparison ran (improvement is **not** required — a measurable, explainable result is)
 - [ ] Updated scores recorded in your scoreboard
 
 **Next**: [Lab 4 — Explore MORE](./lab-4.md)
