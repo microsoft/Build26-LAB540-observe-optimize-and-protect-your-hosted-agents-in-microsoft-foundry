@@ -30,3 +30,6 @@ __pycache__/
 
 # Do not commit (staging only)
 .do_not_commit/
+
+# Per-learner workshop state (regenerated from template each run)
+workshop/progress.json
