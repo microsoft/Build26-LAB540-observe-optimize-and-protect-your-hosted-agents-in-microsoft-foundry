@@ -50,14 +50,15 @@ See [Skills](../../.agents/skills/) for details on the available Copilot skills.
 
 ## Scoreboard
 
-Track your agent's quality improvement across labs:
+Track your agent's quality improvement across labs. Rows match the Phase 1
+evaluators (see `zava/src/zava-travel-concierge/.foundry/evaluators/phase1-builtin.yaml`):
 
 | Metric | Baseline | After Lab 2 | After Lab 3 | After MORE |
 |--------|----------|-------------|-------------|------------|
-| Relevance | — | — | — | — |
-| Groundedness | — | — | — | — |
-| Safety | — | — | — | — |
-| Overall | — | — | — | — |
+| task_completion | — | — | — | — |
+| coherence | — | — | — | — |
+| indirect_attack | — | — | — | — |
+| Overall pass rate | — | — | — | — |
 
 Fill in your scores as you complete each lab. See [Scoreboard](../scoreboard/README.md) for details.
 

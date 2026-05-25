@@ -12,41 +12,41 @@ The goal: see your agent get measurably better with each optimization pass.
 
 ## Your Scorecard
 
-Copy the template below (or use `workshop/scoreboard/template.md`) and fill in as you go:
+Copy `workshop/scoreboard/template.md` to `workshop/scoreboard/<your-name>.md`
+and fill it in as you go. Rows match the Phase 1 evaluators in
+`zava/src/zava-travel-concierge/.foundry/evaluators/phase1-builtin.yaml`.
 
 | Metric | Baseline (Lab 2) | After Lab 3 | After MORE | Best |
 |--------|-----------------|-------------|------------|------|
-| Relevance | — | — | — | — |
-| Groundedness | — | — | — | — |
-| Coherence | — | — | — | — |
-| Safety | — | — | — | — |
-| Fluency | — | — | — | — |
-| **Overall** | **—** | **—** | **—** | **—** |
+| task_completion | — | — | — | — |
+| coherence | — | — | — | — |
+| indirect_attack | — | — | — | — |
+| **Overall pass rate** | **—** | **—** | **—** | **—** |
+
+Record either the pass-rate (e.g. `7/10`) or the mean score from the
+Foundry portal's eval run page.
 
 ## Interpreting Scores
 
-| Score | Meaning |
-|-------|---------|
-| 5 | Excellent — meets all criteria |
-| 4 | Good — minor issues only |
-| 3 | Acceptable — some gaps |
-| 2 | Poor — significant issues |
-| 1 | Failing — does not meet criteria |
+| Metric | Pass means | Reads as |
+|--------|-----------|----------|
+| task_completion | Agent completed the full travel request end-to-end | Mean 1-5, threshold 4 |
+| coherence | Response was logically consistent and well-structured | Mean 1-5, threshold 4 |
+| indirect_attack | Agent resisted the prompt-injection attempt | Pass/fail, threshold 1 |
 
 ## What Drives Improvement
 
 | Optimization Applied | Typical Impact |
 |---------------------|----------------|
-| Grounding rules added | Groundedness ↑ |
-| Delegation logic improved | Relevance ↑, Completeness ↑ |
-| Safety guardrails added | Safety ↑ |
-| Response format standardized | Coherence ↑, Fluency ↑ |
-| Prompt optimizer pass | All metrics ↑ (systematic) |
-| Red-teaming hardening | Safety ↑ (adversarial) |
+| Tighter delegation rules | task_completion ↑ |
+| Response format standardized | coherence ↑ |
+| Safety guardrails added | indirect_attack ↑ |
+| Prompt optimizer pass | One metric usually trades against another — verify with comparison |
+| Red-teaming hardening | indirect_attack ↑ (adversarial) |
 
 ## Tips
 
-- Scores fluctuate slightly between runs — look at trends, not single points
-- If a score drops after a change, investigate (tracing lab helps)
-- The prompt optimizer typically produces the largest single improvement
+- Small samples (n ≈ 10) mean comparisons are often Inconclusive — don't over-read 1-2 point moves
+- If a score drops after a change, that's data, not failure — read the eval-comparison insight
+- The prompt optimizer is a hypothesis generator, not an oracle — see [Lab 3](../docs/core/lab-3.md)
 - Diminishing returns are normal — going from 3→4 is easier than 4→5

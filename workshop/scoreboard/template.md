@@ -8,14 +8,17 @@
 
 ## Evaluation Scores
 
+Rows match the Phase 1 evaluators in
+`zava/src/zava-travel-concierge/.foundry/evaluators/phase1-builtin.yaml`.
+Record the pass-rate (e.g. `7/10`) or mean score from the Foundry portal
+'s eval run page.
+
 | Metric | Baseline (Lab 2) | After Lab 3 | MORE: _______ | MORE: _______ | Best |
 |--------|-----------------|-------------|---------------|---------------|------|
-| Relevance | | | | | |
-| Groundedness | | | | | |
-| Coherence | | | | | |
-| Safety | | | | | |
-| Fluency | | | | | |
-| **Overall** | | | | | |
+| task_completion | | | | | |
+| coherence | | | | | |
+| indirect_attack | | | | | |
+| **Overall pass rate** | | | | | |
 
 ---
 
