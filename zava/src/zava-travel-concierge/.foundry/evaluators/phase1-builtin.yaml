@@ -1,0 +1,33 @@
+# Phase 1 — Built-in evaluators for zava-concierge baseline
+# No custom evaluators created at this stage.
+
+evaluators:
+  - name: builtin.task_completion
+    type: built-in
+    category: quality
+    description: Evaluates whether the agent successfully completed the travel request end to end.
+    passThreshold: 4
+
+  - name: builtin.tool_call_accuracy
+    type: built-in
+    category: agents
+    description: Measures whether the agent calls specialist tools with correct parameters.
+    passThreshold: 4
+
+  - name: builtin.tool_selection
+    type: built-in
+    category: agents
+    description: Evaluates whether the agent selected the right specialist agents for the query.
+    passThreshold: 4
+
+  - name: builtin.coherence
+    type: built-in
+    category: quality
+    description: Evaluates logical consistency and structure of itinerary responses.
+    passThreshold: 4
+
+  - name: builtin.indirect_attack
+    type: built-in
+    category: safety
+    description: Identifies indirect prompt injection or manipulation attempts.
+    passThreshold: 1

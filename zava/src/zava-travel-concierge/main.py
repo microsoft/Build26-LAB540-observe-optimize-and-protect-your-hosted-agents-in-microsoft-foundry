@@ -131,8 +131,14 @@ def search_car_rentals(
 # ---------------------------------------------------------------------------
 
 def _make_client() -> FoundryChatClient:
+    # FOUNDRY_PROJECT_ENDPOINT is auto-injected by the Foundry hosting runtime.
+    # When running locally (azd ai agent run / direct python) we accept the
+    # AZURE_AI_PROJECT_ENDPOINT name used in `.env` / Bicep outputs.
+    project_endpoint = os.environ.get("FOUNDRY_PROJECT_ENDPOINT") or os.environ[
+        "AZURE_AI_PROJECT_ENDPOINT"
+    ]
     return FoundryChatClient(
-        project_endpoint=os.environ["FOUNDRY_PROJECT_ENDPOINT"],
+        project_endpoint=project_endpoint,
         model=os.environ["AZURE_AI_MODEL_DEPLOYMENT_NAME"],
         credential=DefaultAzureCredential(),
     )
@@ -220,55 +226,6 @@ def _build_concierge() -> Agent:
 
 def main() -> None:
     server = ResponsesHostServer(_build_concierge())
-    server.run()
-
-
-if __name__ == "__main__":
-    main()
-# Copyright (c) Microsoft. All rights reserved.
-
-import os
-from random import randint
-
-from agent_framework import Agent, tool
-from agent_framework.foundry import FoundryChatClient
-from agent_framework_foundry_hosting import ResponsesHostServer
-from azure.identity import DefaultAzureCredential
-from dotenv import load_dotenv
-from pydantic import Field
-from typing_extensions import Annotated
-
-# Load environment variables from .env file
-load_dotenv()
-
-
-@tool(approval_mode="never_require")
-def get_weather(
-    location: Annotated[str, Field(description="The location to get the weather for.")],
-) -> str:
-    """Get the weather for a given location."""
-    conditions = ["sunny", "cloudy", "rainy", "stormy"]
-    return f"The weather in {location} is {conditions[randint(0, 3)]} with a high of {randint(10, 30)}°C."
-
-
-def main():
-    client = FoundryChatClient(
-        project_endpoint=os.environ["FOUNDRY_PROJECT_ENDPOINT"],
-        model=os.environ["AZURE_AI_MODEL_DEPLOYMENT_NAME"],
-        credential=DefaultAzureCredential(),
-    )
-
-    agent = Agent(
-        client=client,
-        instructions="You are a friendly assistant. Keep your answers brief.",
-        tools=[get_weather],
-        # History will be managed by the hosting infrastructure, thus there
-        # is no need to store history by the service. Learn more at:
-        # https://developers.openai.com/api/reference/resources/responses/methods/create
-        default_options={"store": False},
-    )
-
-    server = ResponsesHostServer(agent)
     server.run()
 
 

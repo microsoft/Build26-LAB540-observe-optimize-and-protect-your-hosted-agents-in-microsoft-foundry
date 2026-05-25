@@ -6,7 +6,7 @@ requiredVersions:
 name: zava-travel-concierge
 services:
     zava-concierge:
-        project: src/zava-concierge
+        project: src/zava-travel-concierge
         host: azure.ai.agent
         language: docker
         docker:

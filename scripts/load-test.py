@@ -14,14 +14,14 @@ Usage (from repo root):
 
     # 1. Make sure your .env has AZURE_AI_PROJECT_ENDPOINT set
     # 2. Run with defaults (50 requests, 5 concurrent)
-    python scripts/3-load-test.py
+    python scripts/load-test.py
 
     # Or override
-    python scripts/3-load-test.py --total 100 --concurrency 10 \
+    python scripts/load-test.py --total 100 --concurrency 10 \
         --agent zava-concierge
 
 Requires: `openai`, `azure-identity`, `python-dotenv` (already in
-`zava-travel/src/zava-concierge/requirements.txt` plus `openai`).
+`zava/src/zava-travel-concierge/requirements.txt` plus `openai`).
 """
 from __future__ import annotations
 
@@ -40,7 +40,7 @@ from openai import AsyncOpenAI
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 PROMPTS_FILE = REPO_ROOT / "data" / "jsonl" / "sample_prompts.jsonl"
-RESULTS_DIR = REPO_ROOT / "zava-travel" / "src" / "zava-concierge" / ".foundry" / "loadtest"
+RESULTS_DIR = REPO_ROOT / "zava" / "src" / "zava-travel-concierge" / ".foundry" / "loadtest"
 
 # A handful of intentionally off-domain / adversarial prompts so the
 # evaluators have something to flag. Mix these in at low rate.
@@ -73,7 +73,7 @@ def build_client() -> tuple[AsyncOpenAI, str]:
     project_endpoint = os.environ.get("AZURE_AI_PROJECT_ENDPOINT")
     if not project_endpoint:
         raise SystemExit(
-            "AZURE_AI_PROJECT_ENDPOINT is not set. Run scripts/2-setup-env.sh "
+            "AZURE_AI_PROJECT_ENDPOINT is not set. Run scripts/discover-env.sh "
             "or copy scripts/sample.env to .env and fill it in."
         )
 

@@ -10,4 +10,4 @@ pandas
 azure-ai-projects>=2.0.0
 
 # Zava Concierge agent dependencies
--r zava-travel/src/zava-concierge/requirements.txt
+-r zava/src/zava-travel-concierge/requirements.txt

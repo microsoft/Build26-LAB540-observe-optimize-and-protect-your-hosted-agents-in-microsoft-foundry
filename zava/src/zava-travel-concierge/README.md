@@ -1,6 +1,6 @@
-# What this sample demonstrates
+# Zava Travel Concierge — Hosted Agent
 
-An [Agent Framework](https://github.com/microsoft/agent-framework) agent with **locally-defined Python tools** hosted using the **Responses protocol**. It shows how to define custom tools with the `@tool` decorator and register them with the agent so the model can call them during a conversation. A `get_weather` function is included as an example tool.
+A multi-agent orchestration system built with [Agent Framework](https://github.com/microsoft/agent-framework) and hosted using the **Responses protocol**. The Concierge delegates to three specialist agents (flights, hotels, car rentals) using locally-defined Python tools registered with the `@tool` decorator.
 
 ## How It Works
 
@@ -25,7 +25,7 @@ Follow the instructions in the [Running the Agent Host Locally](../../README.md#
 Send a POST request to the server with a JSON body containing a "message" field to interact with the agent. For example:
 
 ```bash
-curl -X POST http://localhost:8088/responses -H "Content-Type: application/json" -d '{"input": "What is the weather in Seattle?"}'
+curl -X POST http://localhost:8088/responses -H "Content-Type: application/json" -d '{"input": "What flights are available from Chicago to Rome?"}'
 ```
 
 ## Deploying the Agent to Foundry

@@ -25,3 +25,6 @@ If a user asks for help filing an issue, or reports a problem:
 - If no templates exist, create a plain issue with a clear title and description
 - Check `gh label list` for available labels and apply relevant ones
 - Do not hardcode template names or labels — always discover what's available at runtime
+
+### Workshop Skills
+Workshop-specific skills (used to guide learners through this workshop) live under `.agents/skills/`. Each skill folder contains a `SKILL.md` spec and a `resources/` folder. When a learner uses phrases like "run the workshop", "help me debug", "explain this", "what's next", "set up my environment", or "author a Skillable page", look up the matching skill under `.agents/skills/` and follow its `SKILL.md` instructions.

@@ -1,0 +1,33 @@
+{
+  "workshop_slug": "build26-lab540",
+  "path": "self-paced",
+  "started_at": "2026-05-25T00:00:00Z",
+  "current_step": "00.2",
+  "completed_steps": [],
+  "completed_substeps": ["00.1"],
+  "skipped_steps": [],
+  "blocked": true,
+  "blocked_reason": "Self-paced setup requires a pre-existing Azure resource group + Foundry project, but docs don't tell the learner how to provision one. Run paused to redesign setup flow.",
+  "scores": {
+    "baseline": {
+      "relevance": null,
+      "groundedness": null,
+      "coherence": null,
+      "safety": null,
+      "fluency": null,
+      "overall": null
+    },
+    "optimized": {
+      "relevance": null,
+      "groundedness": null,
+      "coherence": null,
+      "safety": null,
+      "fluency": null,
+      "overall": null
+    }
+  },
+  "notes": [
+    { "substep": "00.1", "outcome": "Path selected: self-paced." },
+    { "substep": "00.2", "outcome": "Prereqs OK: az 2.86.0, azd 1.25.2, Docker 29.5.0, Python 3.12.13. Logged into <your-subscription> as <your-account>." }
+  ]
+}

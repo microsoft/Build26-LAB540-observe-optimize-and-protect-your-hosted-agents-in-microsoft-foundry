@@ -41,7 +41,7 @@ echo ""
 # ────────────────────────────────────────────────────────────
 #  Step 1: Check Azure CLI login
 # ────────────────────────────────────────────────────────────
-echo -e "${BLUE}[1/5]${NC} Checking Azure CLI authentication..."
+echo -e "${BLUE}[1/6]${NC} Checking Azure CLI authentication..."
 
 if ! command -v az &> /dev/null; then
     echo -e "${RED}  ✗ Azure CLI (az) is not installed.${NC}"
@@ -75,7 +75,7 @@ fi
 #  Step 2: Create .env from sample.env if it doesn't exist
 # ────────────────────────────────────────────────────────────
 echo ""
-echo -e "${BLUE}[2/5]${NC} Checking .env file..."
+echo -e "${BLUE}[2/6]${NC} Checking .env file..."
 
 if [ ! -f "${SAMPLE_FILE}" ]; then
     echo -e "${RED}  ✗ sample.env not found at: ${SAMPLE_FILE}${NC}"
@@ -122,19 +122,62 @@ set_env_if_empty() {
 }
 
 # ────────────────────────────────────────────────────────────
-#  Step 3: Auto-populate subscription info
+#  Step 3: Detect azd env (self-guided path) and seed values
 # ────────────────────────────────────────────────────────────
 echo ""
-echo -e "${BLUE}[3/5]${NC} Auto-populating subscription info..."
+echo -e "${BLUE}[3/6]${NC} Looking for an existing azd environment..."
+
+AZD_RG=""
+AZD_LOCATION=""
+AZD_SUB=""
+
+if command -v azd &>/dev/null && [ -d "${AZD_ENV_DIR}" ]; then
+    # `azd env get-values` must be run from the azd project dir (zava/).
+    AZD_VALUES=$(cd "${REPO_ROOT}/zava" && azd env get-values 2>/dev/null || true)
+    if [ -n "${AZD_VALUES}" ]; then
+        AZD_ENV_NAME=$(cd "${REPO_ROOT}/zava" && azd env get-value AZURE_ENV_NAME 2>/dev/null || echo "")
+        echo -e "${GREEN}  ✓ Found azd environment: ${AZD_ENV_NAME:-<default>}${NC}"
+        AZD_RG=$(echo "${AZD_VALUES}" | grep '^AZURE_RESOURCE_GROUP_NAME=' | cut -d'=' -f2- | tr -d '"' || echo "")
+        if [ -z "${AZD_RG}" ]; then
+            AZD_RG=$(echo "${AZD_VALUES}" | grep '^AZURE_RESOURCE_GROUP=' | cut -d'=' -f2- | tr -d '"' || echo "")
+        fi
+        AZD_LOCATION=$(echo "${AZD_VALUES}" | grep '^AZURE_LOCATION=' | cut -d'=' -f2- | tr -d '"' || echo "")
+        AZD_SUB=$(echo "${AZD_VALUES}" | grep '^AZURE_SUBSCRIPTION_ID=' | cut -d'=' -f2- | tr -d '"' || echo "")
+        [ -n "${AZD_RG}" ]       && echo -e "${GREEN}    • RG:    ${AZD_RG}${NC}"
+        [ -n "${AZD_LOCATION}" ] && echo -e "${GREEN}    • Loc:   ${AZD_LOCATION}${NC}"
+        [ -n "${AZD_SUB}" ]      && echo -e "${GREEN}    • Sub:   ${AZD_SUB:0:8}...${NC}"
+    else
+        echo -e "${YELLOW}  ⚠ azd env directory exists but no values yet. Did you run 'cd zava && azd up'?${NC}"
+    fi
+else
+    echo -e "${YELLOW}  — No azd environment detected (skillable / instructor-led path)${NC}"
+fi
+
+# Apply azd-discovered values to .env (only if .env is empty for those keys)
+if [ -n "${AZD_SUB}" ]; then
+    set_env_if_empty "AZURE_SUBSCRIPTION_ID" "${AZD_SUB}" || true
+fi
+if [ -n "${AZD_RG}" ]; then
+    set_env_if_empty "AZURE_RESOURCE_GROUP" "${AZD_RG}" || true
+fi
+if [ -n "${AZD_LOCATION}" ]; then
+    set_env_if_empty "AZURE_LOCATION" "${AZD_LOCATION}" || true
+fi
+
+# ────────────────────────────────────────────────────────────
+#  Step 4: Auto-populate subscription info (fallback to current az context)
+# ────────────────────────────────────────────────────────────
+echo ""
+echo -e "${BLUE}[4/6]${NC} Auto-populating subscription info..."
 
 SUB_ID=$(az account show --query "id" -o tsv 2>/dev/null || echo "")
 set_env_if_empty "AZURE_SUBSCRIPTION_ID" "${SUB_ID}" || true
 
 # ────────────────────────────────────────────────────────────
-#  Step 4: Discover resources in resource group
+#  Step 5: Discover resources in resource group
 # ────────────────────────────────────────────────────────────
 echo ""
-echo -e "${BLUE}[4/5]${NC} Resource group discovery..."
+echo -e "${BLUE}[5/6]${NC} Resource group discovery..."
 
 # Check if resource group is already set
 EXISTING_RG=$(grep "^AZURE_RESOURCE_GROUP=" "${ENV_FILE}" | cut -d'=' -f2- | tr -d '"' || echo "")
@@ -192,6 +235,27 @@ else
     else
         echo -e "${YELLOW}  ⚠ No Foundry project found. Set AZURE_AI_PROJECT_ENDPOINT manually.${NC}"
     fi
+
+    # ── Find model deployment name (first GlobalStandard chat model) ──
+    MODEL_DEPLOYMENT=$(az cognitiveservices account deployment list \
+        --name "${ACCOUNT_AI}" \
+        --resource-group "${SELECTED_RG}" \
+        --query "[?sku.name=='GlobalStandard'] | [0].name" \
+        -o tsv 2>/dev/null || echo "")
+    if [ -z "${MODEL_DEPLOYMENT}" ]; then
+        # Fall back to any deployment
+        MODEL_DEPLOYMENT=$(az cognitiveservices account deployment list \
+            --name "${ACCOUNT_AI}" \
+            --resource-group "${SELECTED_RG}" \
+            --query "[0].name" \
+            -o tsv 2>/dev/null || echo "")
+    fi
+    if [ -n "${MODEL_DEPLOYMENT}" ]; then
+        echo -e "${GREEN}  ✓ Model deployment: ${MODEL_DEPLOYMENT}${NC}"
+        set_env_if_empty "AZURE_AI_MODEL_DEPLOYMENT_NAME" "${MODEL_DEPLOYMENT}" || true
+    else
+        echo -e "${YELLOW}  ⚠ No model deployment found. Set AZURE_AI_MODEL_DEPLOYMENT_NAME manually.${NC}"
+    fi
 fi
 
 # ── Find Azure Container Registry ──
@@ -230,10 +294,10 @@ else
 fi
 
 # ────────────────────────────────────────────────────────────
-#  Step 5: Summary
-# ────────────────────────────────────────────────────────────
+#  Step 6: Summary
+# ─────────────────────────────────────────────────────────
 echo ""
-echo -e "${BLUE}[5/5]${NC} Checking .env completeness..."
+echo -e "${BLUE}[6/6]${NC} Checking .env completeness..."
 echo ""
 
 MISSING=0

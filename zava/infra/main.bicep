@@ -11,39 +11,19 @@ param environmentName string
 @description('Name of the resource group to use or create')
 param resourceGroupName string = 'rg-${environmentName}'
 
-// Restricted locations to match list from
-// https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/responses?tabs=python-key#region-availability
+// Restricted to the 3 regions recommended by the workshop. All three are in the
+// Foundry Hosted Agents preview region list AND have broad gpt-4.1-mini quota:
+//   https://learn.microsoft.com/azure/foundry/agents/concepts/hosted-agents#region-availability
+//   https://learn.microsoft.com/azure/ai-foundry/openai/how-to/responses#region-availability
+// eastus2 is the default (broadest tool support including Computer Use).
 @minLength(1)
-@description('Primary location for all resources')
+@description('Primary location for all resources. Default: eastus2.')
 @allowed([
-  'australiaeast'
-  'brazilsouth'
-  'canadacentral'
-  'canadaeast'
-  'eastus'
   'eastus2'
-  'francecentral'
-  'germanywestcentral'
-  'italynorth'
-  'japaneast'
-  'koreacentral'
-  'northcentralus'
-  'norwayeast'
-  'polandcentral'
-  'southafricanorth'
-  'southcentralus'
-  'southeastasia'
-  'southindia'
-  'spaincentral'
   'swedencentral'
-  'switzerlandnorth'
-  'uaenorth'
-  'uksouth'
-  'westus'
-  'westus2'
-  'westus3'
+  'northcentralus'
 ])
-param location string
+param location string = 'eastus2'
 
 param aiDeploymentsLocation string
 
