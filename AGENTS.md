@@ -47,3 +47,17 @@ When reviewing open issues at the start of each phase, summarize them and propos
 
 ### Getting Started
 If this repo still has a `GUIDANCE.md` file, that means setup isn't complete yet. Read it and follow the instructions to prepare the repo for publication.
+
+## 🧩 Workshop Skills
+
+Workshop-specific skills live under `.agents/skills/`. Each skill is a folder containing a `SKILL.md` (the skill spec) plus a `resources/` folder for templates and data files. Available skills:
+
+- `.agents/skills/run-workshop/` — guides a learner through the full LAB540 workshop end-to-end, presenting one step at a time and tracking progress in `workshop/progress.json`.
+- `.agents/skills/setup-env/` — automates environment setup (Azure login, `.env` creation, validation).
+- `.agents/skills/complete-lab/` — walks the learner through completing a specific lab.
+- `.agents/skills/explain-this/` — explains what just happened during a workshop step.
+- `.agents/skills/help-me-debug/` — troubleshooting helper when a step fails.
+- `.agents/skills/what-next/` — recommends the next lab or activity.
+- `.agents/skills/add-skillable-instructions/` — authors and bundles Skillable-compliant lab instruction pages.
+
+When the learner asks for help with the workshop (e.g. "run the workshop", "help me debug", "explain this"), match their intent to the appropriate skill and follow that skill's `SKILL.md` instructions.

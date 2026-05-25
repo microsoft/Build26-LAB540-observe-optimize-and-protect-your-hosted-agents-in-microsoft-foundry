@@ -1,0 +1,13 @@
+# Jupyter notebook runtime
+ipykernel
+ipywidgets
+jupyter
+
+# Data
+pandas
+
+# Microsoft Foundry
+azure-ai-projects>=2.0.0
+
+# Zava Concierge agent dependencies
+-r zava/src/zava-travel-concierge/requirements.txt

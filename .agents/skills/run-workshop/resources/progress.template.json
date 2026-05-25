@@ -1,0 +1,30 @@
+{
+  "workshop_slug": "build26-lab540",
+  "path": "__SKILLABLE_OR_SELF_GUIDED__",
+  "started_at": "__ISO8601_UTC__",
+  "current_step": "00.1",
+  "completed_steps": [],
+  "completed_substeps": [],
+  "skipped_steps": [],
+  "blocked": false,
+  "blocked_reason": null,
+  "scores": {
+    "baseline": {
+      "relevance": null,
+      "groundedness": null,
+      "coherence": null,
+      "safety": null,
+      "fluency": null,
+      "overall": null
+    },
+    "optimized": {
+      "relevance": null,
+      "groundedness": null,
+      "coherence": null,
+      "safety": null,
+      "fluency": null,
+      "overall": null
+    }
+  },
+  "notes": []
+}

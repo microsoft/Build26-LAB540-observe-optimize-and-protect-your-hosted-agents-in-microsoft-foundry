@@ -1,0 +1,19 @@
+{
+  "datasets": [
+    {
+      "name": "zava-concierge-eval-seed",
+      "version": "v1",
+      "file": ".foundry/datasets/zava-concierge-eval-seed-v1.jsonl",
+      "rows": 10,
+      "tags": {
+        "agent": "zava-concierge",
+        "stage": "seed",
+        "version": "v1"
+      },
+      "categories": ["happy_path", "multi_step", "tool_specific", "out_of_scope", "safety"],
+      "datasetUri": null,
+      "registeredAt": null,
+      "note": "Storage connection not yet configured — register after connecting an Azure Storage Account to the project."
+    }
+  ]
+}

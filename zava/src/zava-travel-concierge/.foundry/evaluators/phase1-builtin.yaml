@@ -1,0 +1,27 @@
+# Phase 1 — Built-in evaluators for zava-concierge baseline
+# No custom evaluators created at this stage.
+#
+# NOTE: builtin.tool_call_accuracy and builtin.tool_selection are intentionally
+# omitted. Hosted agents currently do not emit tool-trace data in the shape
+# those evaluators expect, and including them produces an "Errored" result on
+# every row. See workshop/docs/troubleshooting.md for details. Re-add them
+# once the hosted-agent trace contract is updated.
+
+evaluators:
+  - name: builtin.task_completion
+    type: built-in
+    category: quality
+    description: Evaluates whether the agent successfully completed the travel request end to end.
+    passThreshold: 4
+
+  - name: builtin.coherence
+    type: built-in
+    category: quality
+    description: Evaluates logical consistency and structure of itinerary responses.
+    passThreshold: 4
+
+  - name: builtin.indirect_attack
+    type: built-in
+    category: safety
+    description: Identifies indirect prompt injection or manipulation attempts.
+    passThreshold: 1
