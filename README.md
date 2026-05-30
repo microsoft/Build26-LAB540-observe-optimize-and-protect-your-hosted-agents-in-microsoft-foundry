@@ -119,6 +119,10 @@ Use these as a starting point — or write your own!
 |:---------|:------------|
 | [https://aka.ms/build26-next-steps](https://aka.ms/build26-next-steps) | Take the next step in your learning journey after Build 2026 |
 
+Find other developers, like you, building on Microsoft Foundry in Discord 
+
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/bSC7dqjAU5)
+
 
 ### 🌟 Microsoft Learn MCP Server
 
