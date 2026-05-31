@@ -1,4 +1,4 @@
-# Self-Guided Step 1 — Install Prerequisites & Open Workspace
+# Step 1 — Install Prerequisites & Open Workspace
 
 You have two options:
 
