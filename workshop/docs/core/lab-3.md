@@ -74,6 +74,36 @@ cd zava
 azd deploy
 ```
 
+> **⚠️ Skillable / pre-provisioned environments only.**
+> If you are on the Skillable path, `azd deploy` will fail with
+> `AZURE_AI_PROJECT_ID is not set` because the `.azure/` state directory
+> doesn't exist in your Codespace — it lives only in the environment that
+> ran `azd up` during pre-provisioning. Restore it with two commands:
+>
+> ```bash
+> # Step 1 — get the Foundry project ARM resource ID
+> PROJECT_ID=$(az resource list \
+>   --resource-group "$AZURE_RESOURCE_GROUP" \
+>   --query "[?type=='Microsoft.CognitiveServices/accounts/projects'].id" \
+>   -o tsv)
+>
+> # Step 2 — link azd to the existing project (interactive wizard)
+> cd zava
+> azd ai agent init --project-id "$PROJECT_ID"
+> ```
+>
+> In the wizard choose:
+> - **Use the code in the current directory**
+> - Agent name: `zava-concierge` → confirm "Yes" to reuse existing
+> - Model: **Use an existing model deployment** → `gpt-4.1-mini`
+> - Startup command: `python main.py`
+>
+> This writes `.azure/` and `agent.yaml` locally. Then run `azd deploy`
+> again — it will build and push normally.
+>
+> **Self-guided learners** who ran `azd up` themselves: skip this — your
+> `.azure/` directory already exists.
+
 When it finishes, ask Copilot or check the Foundry portal to confirm the
 new version is **Active**:
 

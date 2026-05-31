@@ -100,6 +100,8 @@ module applicationInsights '../monitor/applicationinsights.bicep' = if (shouldCr
     name: 'appi-${resourceToken}'
     logAnalyticsWorkspaceId: logAnalytics.outputs.id
     projectMIPrincipalId: aiAccount::project.identity.principalId
+    userPrincipalId: principalId
+    userPrincipalType: principalType
   }
 }
 
@@ -202,14 +204,76 @@ module aiConnections './connection.bicep' = [for (connection, index) in connecti
   }
 }]
 
-// Azure AI User for the developer, scoped to the Foundry Project.
-// Project scope is sufficient for creating/running agents and calling models via the project endpoint.
+// Foundry User for the developer, scoped to the Foundry Account.
+// Account scope covers project-level access and ensures parity with the Skillable deploy script.
 resource localUserAzureAIUserRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  scope: aiAccount::project
+  scope: aiAccount
   name: guid(subscription().id, resourceGroup().id, principalId, '53ca6127-db72-4b80-b1b0-d745d6d5456d')
   properties: {
     principalId: principalId
     principalType: principalType
+    roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions', '53ca6127-db72-4b80-b1b0-d745d6d5456d')
+  }
+}
+
+// Foundry Project Manager for the developer, scoped to the Foundry Account.
+// Required for: creating/deleting agents, managing agent versions, updating project settings.
+// Mirrors the Grant-Role $userId $foundryProjectManagerRoleId call in 2-deploy.ps1.
+resource localUserFoundryProjectManagerRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: aiAccount
+  name: guid(subscription().id, resourceGroup().id, principalId, 'eadc314b-1a2d-4efa-be10-5d325db5065e')
+  properties: {
+    principalId: principalId
+    principalType: principalType
+    roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions', 'eadc314b-1a2d-4efa-be10-5d325db5065e')
+  }
+}
+
+// Cognitive Services OpenAI Contributor for the developer, scoped to the Foundry account.
+// Required for prompt optimizer: grants Microsoft.CognitiveServices/accounts/OpenAI/fine-tunes/read
+// which backs the POST /openai/v1/dashboard/generate/optimize/promptv2 endpoint.
+resource localUserOpenAIContributorRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: aiAccount
+  name: guid(subscription().id, resourceGroup().id, principalId, 'a001fd3d-188f-4b5d-821b-7da978bf7442')
+  properties: {
+    principalId: principalId
+    principalType: principalType
+    roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions', 'a001fd3d-188f-4b5d-821b-7da978bf7442')
+  }
+}
+
+// Cognitive Services OpenAI User for the AI project's system-assigned managed identity.
+// Required for LLM-judge evaluators (task_completion, coherence, etc.) in Azure AI Foundry evals.
+// The Foundry evaluation service invokes the judge model using the project's managed identity,
+// not the calling user's identity. Without this role, eval runs fail with:
+//   AuthenticationError: Principal does not have access to API/Operation
+// Scope: the AI account (data-plane calls go to account, not project endpoint).
+resource projectMIOpenAIUserRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: aiAccount
+  // Cognitive Services OpenAI User: 5e0bd9bd-7b93-4f28-af87-19fc36ad61bd
+  // Note: role assignment name must be computable at deployment start, so we use aiAccount.name
+  // (not the MI's principalId). The principalId is set in properties below.
+  name: guid(subscription().id, resourceGroup().id, aiAccount.name, 'project-mi-openai-user', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
+  properties: {
+    principalId: aiAccount::project.identity.principalId
+    principalType: 'ServicePrincipal'
+    roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
+  }
+}
+
+// Foundry User for the AI project's system-assigned managed identity, scoped to the AI Account.
+// Per https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/hosted-agent-permissions:
+//   "The project's managed identity needs access to the Foundry account to perform model inference
+//    through the project endpoint. The project's access is covered by the Foundry User role at
+//    the scope of the Foundry account."
+// May be auto-created by Foundry on first project provision, but declared here for idempotency.
+// Foundry User (formerly Azure AI User): 53ca6127-db72-4b80-b1b0-d745d6d5456d
+resource projectMIFoundryUserRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: aiAccount
+  name: guid(subscription().id, resourceGroup().id, aiAccount.name, 'project-mi-foundry-user', '53ca6127-db72-4b80-b1b0-d745d6d5456d')
+  properties: {
+    principalId: aiAccount::project.identity.principalId
+    principalType: 'ServicePrincipal'
     roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions', '53ca6127-db72-4b80-b1b0-d745d6d5456d')
   }
 }

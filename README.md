@@ -67,24 +67,16 @@ To complete this lab you must have:
 _An Azure subscription and GitHub Copilot subscription are provided to
 in-venue attendees. Self-guided learners should bring their own._
 
-There are **two paths** through this lab — pick the one that matches how
-you're taking it:
+There are **two paths** through this lab — pick the one that matches how you're taking it. These paths use the Copilot-driven learner experience.
 
 | Path | For | Start Here |
 |------|-----|------------|
-| 🏫 **Skillable** (in-venue) | Build attendees — Azure RG and Foundry agent are pre-provisioned for you | [`workshop/docs/00-setup/skillable/`](./workshop/docs/00-setup/skillable/README.md) |
-| 🏠 **Self-Guided** (at-home) | You'll provision everything yourself with `azd up` | [`workshop/docs/00-setup/self-guided/`](./workshop/docs/00-setup/self-guided/README.md) |
+| 🏫 **Skillable** (in-venue) | Build attendees — Azure RG and Foundry agent are pre-provisioned for you | [Skillable Guide](./workshop/docs/00-setup/GUIDE.md#11-skillable-learner-in-venue)) |
+| 🏠 **Self-Guided** (at-home) | You'll provision everything yourself with `azd up` | [`Self-Guided`](./workshop/docs/00-setup/self-guided/README.md#self-guided-path-at-home) |
 
-Both paths converge at the [shared setup steps](./workshop/docs/00-setup/shared/README.md)
-once you have a Codespace open and an Azure resource group available.
+For a manual workshop experience (following instructions step by step) 
 
-For the full workshop walkthrough — including the CORE labs and MORE
-deep-dives — see the [Workshop guide](./workshop/docs/README.md).
-
-> 💡 **Prefer Copilot-driven setup?** With the workshop skills installed,
-> open Copilot Chat and ask *"Run the workshop"* — the
-> [`run-workshop`](./.agents/skills/run-workshop/SKILL.md) skill detects
-> your path, walks you through each step, and tracks progress for you.
+> 📋 **Prefer Manual setup?** — see the [Workshop guide](./workshop/docs/README.md). **Given the pace of changes, we recommend using the Copilot guide so you can get the added assistance of inline troubleshooting**
 
 ---
 
@@ -118,10 +110,6 @@ Use these as a starting point — or write your own!
 | Resource | Description |
 |:---------|:------------|
 | [https://aka.ms/build26-next-steps](https://aka.ms/build26-next-steps) | Take the next step in your learning journey after Build 2026 |
-
-Find other developers, like you, building on Microsoft Foundry in Discord 
-
-[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/bSC7dqjAU5)
 
 
 ### 🌟 Microsoft Learn MCP Server
