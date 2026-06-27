@@ -17,7 +17,7 @@ for the resource group name. Use:
 ++@lab.CloudResourceGroup(ResourceGroup1).Name++
 
 It then auto-discovers the Foundry project endpoint, ACR name, App
-Insights connection string, and the `gpt-4.1-mini` model deployment
+Insights connection string, and the `gpt-5.4-mini` model deployment
 name — no further prompts.
 
 - [] `discover-env.sh` finished without errors.

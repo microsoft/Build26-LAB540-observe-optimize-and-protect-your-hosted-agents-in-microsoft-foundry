@@ -80,7 +80,7 @@ The optimizer works best when run iteratively:
 2. **Pass 2**: Fine-tuning based on remaining failures
 3. **Pass 3**: Edge case handling and polish
 
-Each pass should show diminishing but real improvement on the scoreboard.
+Each pass should show diminishing but real improvement in your evaluation scores.
 
 > "Run another optimization pass based on the latest evaluation results"
 
@@ -104,9 +104,5 @@ Track your progress across optimization passes:
 - [ ] Applied at least one optimizer pass
 - [ ] Verified improvement with re-evaluation
 - [ ] Understand how to iterate for continued improvement
-
-## Scoreboard Update
-
-This lab should show the most dramatic improvement on your scoreboard — the optimizer addresses multiple failure modes simultaneously.
 
 **Back to**: [MORE Labs](./README.md)

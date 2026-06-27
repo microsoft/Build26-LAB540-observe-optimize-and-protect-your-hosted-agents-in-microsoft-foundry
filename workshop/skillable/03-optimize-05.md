@@ -9,8 +9,7 @@ Now kick off the Observe skill and let it work.
 1. [] Confirm Copilot starts the Observe workflow (you'll see it begin creating
    files and calling Foundry tools).
 
->[!Note] This kicks off a multi-step workflow. You don't need to do anything
-> while it runs — you'll watch it work on the next page.
+![Copilot Chat kicking off the Observe workflow with tool calls and files](https://raw.githubusercontent.com/microsoft/Build26-LAB540-observe-optimize-and-protect-your-hosted-agents-in-microsoft-foundry/aiewf26-refresh/workshop/self-guided/images/03-optimize-05-start-observe.png)
 
 ---
 

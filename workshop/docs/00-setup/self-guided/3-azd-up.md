@@ -11,7 +11,7 @@ in `zava/src/zava-travel-concierge/agent.manifest.yaml`. In one command it:
 ## 3.1 — Choose a region
 
 This workshop is region-restricted to three Foundry **Hosted Agents**
-preview regions, all of which have `gpt-4.1-mini` GlobalStandard quota:
+preview regions, all of which have `gpt-5.4-mini` GlobalStandard quota:
 
 | Region | Best for | Notes |
 |--------|----------|-------|

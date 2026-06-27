@@ -81,8 +81,4 @@ Compare success rates before and after to confirm the agent is more resilient.
 - [ ] Applied at least one hardening fix
 - [ ] Re-ran red-teaming to verify improvement
 
-## Scoreboard Update
-
-Add a **Safety (adversarial)** row to your scoreboard showing red-teaming resilience before and after hardening.
-
 **Back to**: [MORE Labs](./README.md)

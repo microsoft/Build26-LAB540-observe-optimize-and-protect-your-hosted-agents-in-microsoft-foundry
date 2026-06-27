@@ -74,8 +74,4 @@ This often reveals domain-specific gaps in agent quality.
 - [ ] Created (or started creating) a custom evaluator
 - [ ] Understand how to combine evaluators into a suite
 
-## Scoreboard Update
-
-Add your custom metric to the scoreboard and track it alongside built-in metrics.
-
 **Back to**: [MORE Labs](./README.md)

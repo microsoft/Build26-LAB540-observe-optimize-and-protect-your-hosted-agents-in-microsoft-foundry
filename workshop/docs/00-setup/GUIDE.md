@@ -11,7 +11,7 @@ You have been provided with a Skillable account with an active GitHub Enterprise
 - [X] You launched the Skillable VM and logged in
 - [X] You verified you had Azure credentials (username, password)
 - [X] You opened a private browser and have 3 tabs open
-- [X] (Tab 1) You are logged in to [https://portal.azure.com](ttps://portal.azure.com)
+- [X] (Tab 1) You are logged in to [https://portal.azure.com](https://portal.azure.com)
 - [X] (Tab 3) You are logged in to [https://ai.azure.com](https://ai.azure.com)
 - [X] (Tab 3) You are logged in to GitHub with the Skillable GHE
 - [X] You visited [Lab 540](https://aka.ms/build26/lab540) and launched Codespaces on it.
@@ -133,7 +133,7 @@ Some handy tips before we start:
 
 1. **Path Setting** The workshop will kick off by asking you which path you are on. Make sure you pick the right option for your current context! If you pick the wrong one - that's okay. Just correct it by saying "I picked the wrong path - start again" - and let it guide you in making changes.
 
-1. **Progress Tracker** The workshop skill will track your progress in a file called [`progress.json`](./../workshop/progress.json). This will keep track of what you finished, where you stopped and any issues you faced. This allows you to stop anytime to ask questions (`/explain-this`) or troubleshoot something (`/help-me-debug`) - and have Copilot pick up from where you stopped afterwards by saying `/what-next`.
+1. **Progress Tracker** The workshop skill will track your progress in a file called [`progress.json`](../../progress.json). This will keep track of what you finished, where you stopped and any issues you faced. This allows you to stop anytime to ask questions (`/explain-this`) or troubleshoot something (`/help-me-debug`) - and have Copilot pick up from where you stopped afterwards by saying `/what-next`.
 
 1. **Troubleshooting** Raise your hand to ask a proctor. You can also try asking Copilot to explain something or to help you debug first. Try to use this with caution - too much output can cause you to lose track of your session output. One way to manage this is to click **New Session** to have a second chat open just to ask questions like this. Then move back to the first session to continue workshop.
 

@@ -210,7 +210,7 @@ The `.env` at the repo root should contain (all populated by
 - `AZURE_RESOURCE_GROUP`
 - `AZURE_LOCATION`
 - `AZURE_AI_PROJECT_ENDPOINT`
-- `AZURE_AI_MODEL_DEPLOYMENT_NAME` (default `gpt-4.1-mini`)
+- `AZURE_AI_MODEL_DEPLOYMENT_NAME` (default `gpt-5.4-mini`)
 - `AZURE_CONTAINER_REGISTRY_NAME`
 - `AZURE_CONTAINER_REGISTRY_LOGIN_SERVER`
 - `APPLICATIONINSIGHTS_CONNECTION_STRING` (Application Insights — used by Lab 4 tracing)

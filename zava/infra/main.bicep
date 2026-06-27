@@ -12,7 +12,7 @@ param environmentName string
 param resourceGroupName string = 'rg-${environmentName}'
 
 // Restricted to the 3 regions recommended by the workshop. All three are in the
-// Foundry Hosted Agents preview region list AND have broad gpt-4.1-mini quota:
+// Foundry Hosted Agents preview region list AND have broad gpt-5.4-mini quota:
 //   https://learn.microsoft.com/azure/foundry/agents/concepts/hosted-agents#region-availability
 //   https://learn.microsoft.com/azure/ai-foundry/openai/how-to/responses#region-availability
 // eastus2 is the default (broadest tool support including Computer Use).

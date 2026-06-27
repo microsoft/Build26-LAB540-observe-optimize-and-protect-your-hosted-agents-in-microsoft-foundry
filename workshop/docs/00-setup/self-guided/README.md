@@ -23,7 +23,7 @@ Then continue with the [shared](../shared/README.md) convergence flow:
 `azd up` will create the following in your subscription:
 
 - Microsoft Foundry project (free)
-- `gpt-4.1-mini` GlobalStandard model deployment (pay-per-token)
+- `gpt-5.4-mini` GlobalStandard model deployment (pay-per-token)
 - Azure Container Registry (Basic SKU — ~$0.17/day)
 - Application Insights + Log Analytics (pay-per-GB ingested)
 - Bing Grounding + AI Search connections (free tier where available)

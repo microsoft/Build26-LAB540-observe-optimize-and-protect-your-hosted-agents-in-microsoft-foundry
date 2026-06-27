@@ -3,10 +3,12 @@
 Before you send a prompt, turn on the **evaluators** so Foundry scores each
 response as it happens.
 
-1. [] In the playground, open the **metrics** (or **evaluations**) panel.
-1. [] Enable the built-in evaluators for the agent.
+1. [] In the playground, click the **metrics** (or **evaluations**) button to
+   expose the selections.
+1. [] Enable all the built-in evaluators for the agent, as shown below, then
+   click to close.
 
-<!-- TODO screenshot: playground metrics / evaluators panel -->
+![The playground metrics panel with built-in evaluators enabled](https://raw.githubusercontent.com/microsoft/Build26-LAB540-observe-optimize-and-protect-your-hosted-agents-in-microsoft-foundry/aiewf26-refresh/workshop/self-guided/images/02-observe-02-metrics.png)
 
 >[!Knowledge] **Evaluators** are automatic graders. Foundry's built-in
 > evaluators score each response on dimensions like **task completion**,

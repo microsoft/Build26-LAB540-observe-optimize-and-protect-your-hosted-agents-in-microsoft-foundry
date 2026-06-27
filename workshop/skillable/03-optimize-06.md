@@ -10,7 +10,10 @@ As it runs, you'll see Copilot:
 1. [] Run a **baseline evaluation** of your deployed agent against that dataset.
 1. [] Produce a set of **recommendations** based on the failures it found.
 
-<!-- TODO screenshot: .foundry folder + baseline eval output in chat -->
+It creates a plan of action and starts executing tasks to establish the baseline
+evaluation results, as shown below.
+
+![Copilot Chat creating tasks and running the baseline evaluation](https://raw.githubusercontent.com/microsoft/Build26-LAB540-observe-optimize-and-protect-your-hosted-agents-in-microsoft-foundry/aiewf26-refresh/workshop/self-guided/images/03-optimize-06-init-tasks.png)
 
 >[!Alert] **Let it finish.** The baseline run and analysis take a few minutes.
 > Watch the updates stream in and **wait until the recommendations appear**

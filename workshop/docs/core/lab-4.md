@@ -34,7 +34,6 @@ Pick the topic that interests you most:
 
 - Work through as many MORE labs as you like
 - Each lab builds on the CORE foundation
-- The scoreboard tracks your cumulative improvement
 - Labs can be done in any order
 
 ## After the Session

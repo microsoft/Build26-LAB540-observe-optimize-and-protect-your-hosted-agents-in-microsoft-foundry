@@ -39,21 +39,17 @@ In this hands-on lab, we'll see how the Microsoft Foundry Observability platform
 
 By completing this lab you will learn to:
 
-1. Create and deploy a hosted agent using Azure Developer CLI
+1. Deploy a hosted agent with the Azure Developer CLI
+1. Observe agent behavior with built-in traces, evaluations, and monitoring
 1. Auto-generate test datasets and evaluators using the `observe` skill
-1. Activate the evaluate-optimize loop to iteratively improve agent
-1. Retrieve and analyze production insights to troubleshoot failures
-1. Explore new features like adaptive evaluations & optimization service
+1. Run the evaluate-optimize loop to iteratively improve cost, latency, and quality
+1. Protect agents at scale with continuous evaluation and adaptive red teaming
 
 
-> 📝 **A note on outcomes.** Every learner walks through the **same workflow**
-> and the **same skills** — but the specific scores, evaluator
-> recommendations, and optimized prompts you see will **differ from
-> other learners and from run to run**. Agent responses are
-> non-deterministic, sample sizes are small (n ≈ 10), and the prompt
-> optimizer generates a fresh hypothesis each pass. Focus on learning
-> the loop and how to interpret what you see — not on matching anyone
-> else's numbers.
+> 📝 **A note on outcomes.** Everyone runs the **same workflow and skills**, but
+> your scores, recommendations, and optimized prompts will **vary run to run** —
+> responses are non-deterministic and samples are small (n ≈ 10). Focus on
+> learning the loop, not on matching specific numbers.
 
 
 ### 🏫 Getting started
@@ -67,16 +63,13 @@ To complete this lab you must have:
 _An Azure subscription and GitHub Copilot subscription are provided to
 in-venue attendees. Self-guided learners should bring their own._
 
-There are **two paths** through this lab — pick the one that matches how you're taking it. These paths use the Copilot-driven learner experience.
+There are **three paths** through this lab — pick the one that matches how you're taking it. The first two are **manual, step-by-step** walkthroughs you follow on your own; the third is a **guided, Copilot-driven** experience.
 
 | Path | For | Start Here |
 |------|-----|------------|
-| 🏫 **Skillable** (in-venue) | Build attendees — Azure RG and Foundry agent are pre-provisioned for you | [Skillable Guide](./workshop/docs/00-setup/GUIDE.md#11-skillable-learner-in-venue)) |
-| 🏠 **Self-Guided** (at-home) | You'll provision everything yourself with `azd up` | [`Self-Guided`](./workshop/docs/00-setup/self-guided/README.md#self-guided-path-at-home) |
-
-For a manual workshop experience (following instructions step by step) 
-
-> 📋 **Prefer Manual setup?** — see the [Workshop guide](./workshop/docs/README.md). **Given the pace of changes, we recommend using the Copilot guide so you can get the added assistance of inline troubleshooting**
+| 🏫 **Skillable** (in-venue) | Build attendees — Azure RG and Foundry agent are pre-provisioned for you | [`workshop/skillable`](./workshop/skillable/README.md) |
+| 🏠 **Self-Guided** (at-home) | You'll provision everything yourself with `azd up` | [`workshop/self-guided`](./workshop/self-guided/README.md) |
+| 🧪 **Experimental** (with GitHub Copilot) | A guided, Copilot-driven experience with inline troubleshooting | [`workshop/docs`](./workshop/docs/README.md) |
 
 ---
 
@@ -109,6 +102,7 @@ Use these as a starting point — or write your own!
 
 | Resource | Description |
 |:---------|:------------|
+| [https://aka.ms/hostedagents](https://aka.ms/hostedagents)| Read about the latest updates to Hosted Agents | 
 | [https://aka.ms/build26-next-steps](https://aka.ms/build26-next-steps) | Take the next step in your learning journey after Build 2026 |
 
 Find other developers, like you, building on Microsoft Foundry in Discord 

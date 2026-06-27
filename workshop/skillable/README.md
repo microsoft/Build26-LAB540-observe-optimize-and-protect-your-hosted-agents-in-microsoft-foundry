@@ -104,3 +104,30 @@ every stage closes with a recap of what you did and what comes next.
 > ✅ **Stage success:** you've seen both code-first optimization and continuous
 > optimization in action — one full eval → fix → redeploy loop with Foundry
 > Skills.
+
+---
+
+## Maintainer notes — images
+
+These Skillable pages **reuse the self-guided screenshots** instead of keeping a
+separate copy. Skillable Studio renders the pages live from GitHub, so the
+Observe and Optimize pages reference images by absolute raw-content URL:
+
+```
+https://raw.githubusercontent.com/microsoft/Build26-LAB540-observe-optimize-and-protect-your-hosted-agents-in-microsoft-foundry/aiewf26-refresh/workshop/self-guided/images/<name>.png
+```
+
+The branch segment (`aiewf26-refresh`) matches the rest of the Skillable track
+and the branch the `.skillable-copy.md` bundle is generated from.
+
+<!-- TODO(image-url-branch): the raw URLs across the Skillable pages are pinned
+to the `aiewf26-refresh` working branch so the lab is testable before merge.
+When this branch is merged for release, swap every `/aiewf26-refresh/` path
+segment (image URLs here + in each page, plus the `.skillable-copy.md` include
+bundle) to `/main/`. -->
+
+<!-- TODO(image-recapture): the instructions refactor moved the concierge prompt
+out of main.py into instructions/concierge.md, and the workshop now ships the
+intentionally-basic instructions-0 seed as the deployed baseline. Re-capture the
+Observe screenshots (02-observe-03..05 prompt/trace/Monitor shots) against the
+instructions-0 baseline so the responses shown match what a learner will see. -->

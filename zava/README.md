@@ -47,8 +47,10 @@ flowchart LR
 
 Supported cities: **Paris, London, Tokyo, Rome, Cancún**.
 
-The Concierge is shipped with **intentionally minimal** instructions
-(~12 lines in `main.py`). A much richer rulebook lives in
+The Concierge is shipped with **intentionally minimal** instructions,
+loaded at runtime from
+[`src/zava-travel-concierge/instructions/concierge.md`](src/zava-travel-concierge/instructions/concierge.md).
+A much richer rulebook lives in
 [`src/zava-travel-concierge/data/zava-travel-instructions.md`](src/zava-travel-concierge/data/zava-travel-instructions.md).
 This gap is the workshop's *teaching moment* — the Foundry `observe`
 skill detects the resulting failure clusters and the `prompt_optimize`
@@ -71,16 +73,16 @@ zava/
         ├── agent.manifest.yaml     # Agent template manifest — model & resource deps
         ├── Dockerfile              # python:3.12-slim + main.py
         ├── main.py                 # multi-agent code (concierge + 3 specialists)
+        ├── instructions/           # concierge prompt (active) + versioned snapshots
         ├── requirements.txt        # agent-framework, agent-framework-foundry-hosting
-        ├── data/                   # CSVs the specialists query (flights, hotels, cars)
-        └── .foundry/               # workshop seed — datasets & evaluators
+        └── data/                   # CSVs the specialists query (flights, hotels, cars)
 ```
 
 The `azd` runtime cares about three top-level files:
 
 | File | Purpose |
 |------|---------|
-| [`azure.yaml`](azure.yaml) | Declares the `zava-concierge` service, its `azure.ai.agent` host type, the model deployment to provision (`gpt-4.1-mini`), and the Bicep entry point. |
+| [`azure.yaml`](azure.yaml) | Declares the `zava-concierge` service, its `azure.ai.agent` host type, the model deployment to provision (`gpt-5.4-mini`), and the Bicep entry point. |
 | [`src/zava-travel-concierge/agent.yaml`](src/zava-travel-concierge/agent.yaml) | The **ContainerAgent** spec — protocol (Responses 1.0), container resources, env vars injected at runtime. |
 | [`src/zava-travel-concierge/agent.manifest.yaml`](src/zava-travel-concierge/agent.manifest.yaml) | Declares the **resources** the agent depends on (model deployment), driving the `azd` pre-provision hook. |
 
@@ -207,12 +209,12 @@ azd down --purge --force
 
 The Bicep is locked to three regions — all of them are in the
 [Foundry Hosted Agents preview region list][hosted-agents-regions] **and**
-have broad `gpt-4.1-mini` Global Standard quota:
+have broad `gpt-5.4-mini` Global Standard quota:
 
 | Region | Role | Notes |
 |--------|------|-------|
 | **`eastus2`** | **Default ⭐** | Primary US region. Broadest tool support (the only US region with Computer Use). First in Microsoft's hosted-agent region docs. |
-| `swedencentral` | EU alternate | Best choice for European learners; gpt-4.1-mini in both Global Standard and Provisioned Managed. |
+| `swedencentral` | EU alternate | Best choice for European learners; gpt-5.4-mini in both Global Standard and Provisioned Managed. |
 | `northcentralus` | US backup | Use if eastus2 quota is exhausted. Same tool support as eastus2 except no Computer Use. |
 
 If `azd up` prompts you for a location and you're not sure, pick
@@ -226,7 +228,7 @@ If `azd up` prompts you for a location and you're not sure, pick
 
 For tight inner-loop changes you can run the agent against an existing
 Foundry project without redeploying every time. You still need a Foundry
-project + a `gpt-4.1-mini` deployment in Azure — but `main.py` runs
+project + a `gpt-5.4-mini` deployment in Azure — but `main.py` runs
 locally on your machine.
 
 ```bash
@@ -235,7 +237,7 @@ pip install -r requirements.txt
 
 # point at an existing Foundry project (e.g. one provisioned by `azd up` earlier)
 export AZURE_AI_PROJECT_ENDPOINT="https://<account>.services.ai.azure.com/api/projects/<project>"
-export AZURE_AI_MODEL_DEPLOYMENT_NAME="gpt-4.1-mini"
+export AZURE_AI_MODEL_DEPLOYMENT_NAME="gpt-5.4-mini"
 az login    # DefaultAzureCredential picks this up
 
 python main.py

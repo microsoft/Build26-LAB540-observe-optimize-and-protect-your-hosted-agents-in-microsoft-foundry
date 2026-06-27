@@ -26,7 +26,3 @@ Lab 4: Explore MORE
 | 2 | [Observe & Evaluate](./lab-2.md) | ~15 min | Test dataset + evaluation + recommendations |
 | 3 | [Optimize & Verify](./lab-3.md) | ~15 min | Improved agent with better scores |
 | 4 | [Explore MORE](./lab-4.md) | ~15 min | Deeper understanding of one capability |
-
-## Scoreboard
-
-Track your progress in the [Scoreboard](../../scoreboard/README.md). You'll fill in metrics after Labs 2 and 3 to see your improvement.

@@ -7,7 +7,7 @@ resource group are **pre-provisioned** by the Skillable lab environment.
 
 - ✅ Azure subscription provisioned and selected
 - ✅ Resource group created with a Microsoft Foundry project
-- ✅ `gpt-4.1-mini` model deployed
+- ✅ `gpt-5.4-mini` model deployed
 - ✅ Azure Container Registry, App Insights, and supporting resources created
 - ✅ Codespace template configured
 

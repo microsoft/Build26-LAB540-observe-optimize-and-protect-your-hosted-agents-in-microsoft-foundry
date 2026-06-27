@@ -34,12 +34,10 @@ __pycache__/
 # Per-learner workshop state (regenerated from template each run)
 workshop/progress.json
 
-# Per-learner Foundry workspace state (eval results regenerated every run)
-# Keep tracked: agent-metadata.yaml, datasets/, evaluators/ (workshop seed assets)
-**/.foundry/results/
-
-# Per-learner scoreboard files (contain project IDs, eval IDs, portal URLs)
-# Keep tracked: README.md, template.md (workshop authored)
-workshop/scoreboard/*.md
-!workshop/scoreboard/README.md
-!workshop/scoreboard/template.md
+# Per-learner Foundry workspace state — fully regenerated every run.
+# The .foundry/ folder is a local CACHE created by the Foundry skill
+# (datasets, evaluators, results, agent-metadata) from canonical sources:
+#   - seed eval dataset:  data/jsonl/evaluation_data.jsonl
+#   - custom evaluators:  data/evaluators/
+# Never commit it — nothing required for a fresh run should live only here.
+**/.foundry/

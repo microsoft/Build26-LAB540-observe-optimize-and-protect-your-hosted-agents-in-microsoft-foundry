@@ -80,8 +80,4 @@ Compare results against your Lab 2 baseline to understand how dataset quality af
 - [ ] Curated at least one dataset (removed duplicates, added edge cases)
 - [ ] Understand how dataset versioning works
 
-## Scoreboard Update
-
-After re-evaluating with your curated dataset, update your scoreboard with any changed metrics.
-
 **Back to**: [MORE Labs](./README.md)
