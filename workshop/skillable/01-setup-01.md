@@ -7,7 +7,9 @@ your **GitHub Codespace**.
 >[!Knowledge] Text shown +++like this+++ is **type text** — click it and it is
 > typed into the VM at the current focus point, so you avoid typos.
 >
-> Each step has a **checkbox** — tick it as you go to mark it done. The lab
+>[!Knowledge]  Text shown ++like this++ is **copy-paste text** - click to copy it to your clipboard, then paste it anywhere in the VM (e.g., using Ctrl+V).
+>
+>[!Knowledge] Each step has a **checkbox** — tick it as you go to mark it done. The lab
 > tracks these so you (and we) can see how far you've progressed.
 
 ## Sign in to the lab VM
