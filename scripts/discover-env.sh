@@ -111,7 +111,7 @@ set_env_if_empty() {
     local current
     current=$(grep "^${key}=" "${ENV_FILE}" | cut -d'=' -f2-)
     if [ -z "${current}" ] && [ -n "${value}" ]; then
-        sed -i "s|^${key}=.*|${key}=\"${value}\"|" "${ENV_FILE}"
+        sed -i '' "s|^${key}=.*|${key}=\"${value}\"|" "${ENV_FILE}"
         echo -e "${GREEN}  ✓ ${key} → ${value:0:60}${NC}"
         return 0
     elif [ -n "${current}" ]; then

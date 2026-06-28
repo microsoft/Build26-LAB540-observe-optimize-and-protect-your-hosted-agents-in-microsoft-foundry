@@ -42,7 +42,7 @@ azd extension list
 Else install it now - and verify.
 
 ```bash
-azd extension install azure.ai.agents`
+azd extension install azure.ai.agents
 azd extension list
 ```
 
