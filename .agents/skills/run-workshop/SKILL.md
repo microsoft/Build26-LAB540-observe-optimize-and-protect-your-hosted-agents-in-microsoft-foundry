@@ -91,8 +91,8 @@ After each substep, persist `progress.json` (add to
 | Lab | Substeps | Notes |
 |-----|----------|-------|
 | Lab 1 — Deploy & Validate | `01.1`–`01.6` | For **Skillable**, mark `01.1`–`01.3` (the `azd up` deployment substeps) as `skipped_steps` since the agent is pre-deployed. Both paths run `01.4`–`01.6` (Foundry portal + test prompts + baseline notes). |
-| Lab 2 — Observe & Evaluate | `02.1`–`02.6` | Record baseline scores at `02.4`/`02.6`. |
-| Lab 3 — Optimize & Verify | `03.1`–`03.7` | Record optimized scores at `03.5`/`03.6`. |
+| Lab 2 — Observe & Evaluate | `02.1`–`02.5` | Record baseline scores at `02.4`. |
+| Lab 3 — Optimize & Verify | `03.1`–`03.6` | Record optimized scores at `03.5`. |
 | Lab 4 — Explore MORE | `04.1`–`04.2` | Learner picks one of the MORE labs. |
 
 For each substep:
@@ -162,15 +162,13 @@ Don't announce every write — just keep the file fresh.
 | `02.3` | | Review the generated dataset |
 | `02.4` | | Review eval results (record baseline) |
 | `02.5` | | Review optimization recommendations |
-| `02.6` | | Update scoreboard with baseline |
 | `03` | Lab 3 — Optimize & Verify | |
 | `03.1` | | Review top recommendation |
 | `03.2` | | Apply the optimization |
 | `03.3` | | Redeploy the agent |
 | `03.4` | | Re-run evaluation |
 | `03.5` | | Compare results |
-| `03.6` | | Update scoreboard with optimized scores |
-| `03.7` | | Reflect on the loop |
+| `03.6` | | Reflect on the loop |
 | `04` | Lab 4 — Explore MORE | |
 | `04.1` | | Choose a MORE lab |
 | `04.2` | | Complete chosen MORE lab |
@@ -192,7 +190,6 @@ The skill reads content from:
 - `workshop/docs/00-setup/{README.md, skillable/, self-guided/, shared/}` — Lab 0 prerequisites and setup paths
 - `workshop/docs/core/lab-0.md` through `lab-4.md` — CORE labs
 - `workshop/docs/more/lab-*.md` — MORE labs
-- `workshop/scoreboard/` — Score tracking
 - `.agents/skills/run-workshop/resources/progress.template.json` — Progress file template
 
 ## Lab Flow

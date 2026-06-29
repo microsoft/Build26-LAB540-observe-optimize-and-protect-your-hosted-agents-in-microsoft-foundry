@@ -22,7 +22,7 @@ the same account you're using for Azure CLI.
 You should see:
 
 - Your Foundry project
-- The `gpt-4.1-mini` model deployment under **Models + endpoints**
+- The `gpt-5.4-mini` model deployment under **Models + endpoints**
 - The **Zava Travel Concierge** under **Agents**
 
 - [] Foundry portal is open and shows my project, model, and agent.

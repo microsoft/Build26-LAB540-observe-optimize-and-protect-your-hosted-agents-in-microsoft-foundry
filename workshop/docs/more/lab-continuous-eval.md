@@ -85,8 +85,4 @@ If continuous eval detects an issue:
 - [ ] Generated traffic and saw evaluation trending data
 - [ ] Understand how to configure alerts and respond to regressions
 
-## Scoreboard Update
-
-Continuous eval gives you ongoing scores. Note the trend direction alongside your point-in-time scores.
-
 **Back to**: [MORE Labs](./README.md)

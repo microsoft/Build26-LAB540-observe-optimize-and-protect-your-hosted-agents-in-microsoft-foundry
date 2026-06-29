@@ -19,8 +19,8 @@ Before you deploy, here's what you're about to bring up:
                  │
                  ▼
     ┌──────────────────────────┐
-    │  zava-concierge (host)   │ ← hosted agent, gpt-4.1-mini
-    │  CONCIERGE_INSTRUCTIONS  │    routes + composes itinerary
+    │  zava-concierge (host)   │ ← hosted agent, gpt-5.4-mini
+    │  concierge instructions  │    routes + composes itinerary
     └─┬──────┬────────────┬───┘
       │      │              │
       ▼      ▼              ▼

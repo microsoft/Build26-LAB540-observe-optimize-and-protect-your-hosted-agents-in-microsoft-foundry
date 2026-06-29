@@ -11,7 +11,7 @@ helps you move agents from prototype to production.
 > start the workshop:
 >
 > - An Azure resource group: ++@lab.CloudResourceGroup(ResourceGroup1).Name++
-> - A Microsoft Foundry project with the `gpt-4.1-mini` model deployment
+> - A Microsoft Foundry project with the `gpt-5.4-mini` model deployment
 > - The Zava Travel Concierge **hosted agent** running in your project
 > - An Azure Container Registry with the agent image
 > - Application Insights for telemetry
@@ -128,7 +128,7 @@ for the resource group name. Use:
 ++@lab.CloudResourceGroup(ResourceGroup1).Name++
 
 It then auto-discovers the Foundry project endpoint, ACR name, App
-Insights connection string, and the `gpt-4.1-mini` model deployment
+Insights connection string, and the `gpt-5.4-mini` model deployment
 name — no further prompts.
 
 - [] `discover-env.sh` finished without errors.
@@ -182,7 +182,7 @@ the same account you're using for Azure CLI.
 You should see:
 
 - Your Foundry project
-- The `gpt-4.1-mini` model deployment under **Models + endpoints**
+- The `gpt-5.4-mini` model deployment under **Models + endpoints**
 - The **Zava Travel Concierge** under **Agents**
 
 - [] Foundry portal is open and shows my project, model, and agent.

@@ -32,11 +32,12 @@ Based on the recommendation, modify the agent. Common optimizations include:
 
 ### Option A: Update Agent Instructions
 
-If the recommendation targets the agent's system prompt, edit the instructions:
+If the recommendation targets the agent's system prompt, edit the active
+instructions file (this is the prompt `main.py` loads at runtime):
 
 ```bash
-# Open the agent instructions file
-code data/zava-travel-instructions.md
+# Open the active concierge instructions
+code zava/src/zava-travel-concierge/instructions/concierge.md
 ```
 
 Apply the specific change recommended by the observe skill. For example:
@@ -57,15 +58,15 @@ The optimizer will:
 
 > **⚠️ Unicode gotcha.** If your current instructions contain em-dashes (`—`),
 > smart quotes, bullet characters, or emoji, the optimizer's JSON round-trip
-> can return mojibake (e.g. `—` → `â€”`). Before pasting the optimized text
-> into `main.py`, scan for garbled characters and fix them. To avoid this
-> entirely, keep `CONCIERGE_INSTRUCTIONS` ASCII-only as your seed. See
+> can return mojibake (e.g. `—` → `â€”`). Before saving the optimized text
+> into `instructions/concierge.md`, scan for garbled characters and fix them.
+> To avoid this entirely, keep the instructions ASCII-only as your seed. See
 > [TROUBLESHOOTING.md](../TROUBLESHOOTING.md#prompt_optimize-returns-instructions-with-garbled--mojibake-characters).
 
 ## Step 3.3: Redeploy the Agent
 
-After editing `CONCIERGE_INSTRUCTIONS` in
-`zava/src/zava-travel-concierge/main.py`, redeploy with the bare
+After editing the concierge prompt in
+`zava/src/zava-travel-concierge/instructions/concierge.md`, redeploy with the bare
 `azd deploy` command — it skips infra provisioning and just rebuilds +
 pushes the container, then publishes a new hosted-agent revision:
 
@@ -95,7 +96,7 @@ azd deploy
 > In the wizard choose:
 > - **Use the code in the current directory**
 > - Agent name: `zava-concierge` → confirm "Yes" to reuse existing
-> - Model: **Use an existing model deployment** → `gpt-4.1-mini`
+> - Model: **Use an existing model deployment** → `gpt-5.4-mini`
 > - Startup command: `python main.py`
 >
 > This writes `.azure/` and `agent.yaml` locally. Then run `azd deploy`
@@ -135,20 +136,7 @@ with per-metric deltas and p-values. Likely shapes you'll see:
 > after optimization is **data**, not failure — it tells you which axis you
 > traded off. Decide whether the tradeoff is acceptable, then iterate.
 
-## Step 3.6: Update Your Scoreboard
-
-Record your improved metrics in `workshop/scoreboard/<your-name>.md`
-(see [template](../../scoreboard/template.md)). Rows match the Phase 1
-evaluators:
-
-| Metric | Baseline (Lab 2) | After Optimization (Lab 3) | Change |
-|--------|-----------------|---------------------------|--------|
-| task_completion | _your score_ | _your score_ | ↑ / ↓ / = |
-| coherence | _your score_ | _your score_ | ↑ / ↓ / = |
-| indirect_attack | _your score_ | _your score_ | ↑ / ↓ / = |
-| Overall pass rate | _your score_ | _your score_ | ↑ / ↓ / = |
-
-## Step 3.7: Reflect
+## Step 3.6: Reflect
 
 You've completed one full iteration of the **observe → evaluate → optimize → verify** loop. This is the core workflow for improving hosted agents with Foundry Observability:
 
@@ -161,7 +149,7 @@ Each pass through this loop teaches you something about your agent.
 Improvement is **not** guaranteed on every pass — the value is in the
 feedback signal, which lets you make the next change more informed.
 
-## Step 3.8: (Optional) Cleanup
+## Step 3.7: (Optional) Cleanup
 
 If you're done experimenting and want to free up Azure cost:
 
@@ -182,6 +170,5 @@ Before moving to Lab 4, confirm:
 - [ ] Agent instructions were updated based on recommendations
 - [ ] New version deployed successfully
 - [ ] Re-evaluation comparison ran (improvement is **not** required — a measurable, explainable result is)
-- [ ] Updated scores recorded in your scoreboard
 
 **Next**: [Lab 4 — Explore MORE](./lab-4.md)

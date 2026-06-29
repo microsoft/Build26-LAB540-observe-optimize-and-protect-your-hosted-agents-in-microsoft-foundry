@@ -22,6 +22,8 @@ from typing_extensions import Annotated
 load_dotenv()
 
 DATA_DIR = Path(__file__).parent / "data"
+INSTRUCTIONS_DIR = Path(__file__).parent / "instructions"
+DEFAULT_INSTRUCTIONS_FILE = INSTRUCTIONS_DIR / "concierge.md"
 
 
 # ---------------------------------------------------------------------------
@@ -145,51 +147,33 @@ def _make_client() -> FoundryChatClient:
 
 
 # ============================================================================
-# WORKSHOP SAFETY NOTE — DO NOT COMMIT EDITS TO CONCIERGE_INSTRUCTIONS
+# WORKSHOP NOTE — THE CONCIERGE PROMPT LIVES IN A VERSIONED FILE
 # ============================================================================
-# This string is the seed agent prompt that ships with the workshop. In
-# Lab 3 you will edit it locally to test optimizations, then redeploy
-# with `azd deploy` to evaluate the change.
+# The concierge system prompt is loaded from instructions/concierge.md so it
+# can be iterated and version-controlled independently of this code. In Lab 3
+# you edit that file, snapshot it (scripts/snapshot-instructions.sh), and
+# redeploy with `azd deploy` to evaluate the change.
 #
-# Those edits are EXPERIMENTAL and per-learner. They must stay in your
-# working tree only. If you `git add` and `git commit` this file with
-# your changes:
-#   - Other learners pulling the workshop will inherit your hypothesis
-#     as their starting point.
-#   - The baseline-vs-optimized comparison flow in Lab 3 breaks (because
-#     "baseline" is no longer the seed).
-#
-# Before committing anything in zava/src/zava-travel-concierge/, run:
-#     git diff main.py
-# and confirm CONCIERGE_INSTRUCTIONS is unchanged from the template.
-# If you intentionally want to update the seed (e.g. as a workshop
-# maintainer), open a PR and call that out explicitly in the description.
+# The repo ships with the intentionally-basic baseline seed
+# (instructions/versions/instructions-0.md). It passes simple playground
+# checks but underperforms on the evaluation set — that gap is what you close
+# during the optimization labs. Set CONCIERGE_INSTRUCTIONS_FILE to load a
+# different version without editing the active file.
 # ============================================================================
 
-CONCIERGE_INSTRUCTIONS = """You are the **Zava Travel Concierge**, the single AI assistant that travelers
-talk to at Zava Travel — a premium agency that books flights, hotels, and car
-rentals across Paris, London, Tokyo, Rome, and Cancún.
 
-You are warm, professional, and concise. You never answer flight, hotel, or
-car-rental questions from your own knowledge — you delegate to specialist
-agents available as tools:
+def _load_concierge_instructions() -> str:
+    """Load the concierge system prompt from the active instructions file.
 
-- `flight_agent` — for routes, airlines, cabin classes, prices, availability
-- `hotel_agent` — for properties, star ratings, amenities, nightly rates
-- `car_rental_agent` — for vehicles, daily rates, pickup cities
-
-Rules:
-1. For multi-component requests (e.g. "plan a trip…"), call each relevant
-   specialist independently in parallel, then merge the results into one
-   itinerary.
-2. Always cite the Zava ID (e.g. ZV-FL-013, ZV-HT-010, ZV-CR-011), price, and
-   dates in your recommendation.
-3. Never fabricate flights, hotels, vehicles, prices, or IDs. If a specialist
-   returns no results, say so plainly.
-4. Lead with the recommendation, then a short reason it fits. Offer one
-   meaningful alternative when useful. Currency is USD unless stated.
-5. Decline non-travel, unsafe, or policy-violating requests in one sentence.
-"""
+    Resolution order:
+    1. CONCIERGE_INSTRUCTIONS_FILE env var (absolute, or relative to this file).
+    2. instructions/concierge.md (the active prompt shipped in the image).
+    """
+    override = os.environ.get("CONCIERGE_INSTRUCTIONS_FILE")
+    path = Path(override) if override else DEFAULT_INSTRUCTIONS_FILE
+    if not path.is_absolute():
+        path = Path(__file__).parent / path
+    return path.read_text(encoding="utf-8").strip()
 
 
 def _build_concierge() -> Agent:
@@ -234,7 +218,7 @@ def _build_concierge() -> Agent:
         client=_make_client(),
         name="zava-concierge",
         description="Zava Travel Concierge — orchestrates flight, hotel, and car rental specialists to plan complete itineraries.",
-        instructions=CONCIERGE_INSTRUCTIONS,
+        instructions=_load_concierge_instructions(),
         tools=[
             flight_agent.as_tool(arg_description="Question to delegate to the flight specialist."),
             hotel_agent.as_tool(arg_description="Question to delegate to the hotel specialist."),

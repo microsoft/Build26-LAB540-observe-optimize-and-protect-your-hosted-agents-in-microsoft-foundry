@@ -96,8 +96,4 @@ Check that the specific failures are resolved without regressing elsewhere.
 - [ ] Applied a targeted fix based on trace insights
 - [ ] Verified the fix with re-evaluation
 
-## Scoreboard Update
-
-After trace-informed fixes, update your scoreboard — especially the metrics that were failing.
-
 **Back to**: [MORE Labs](./README.md)

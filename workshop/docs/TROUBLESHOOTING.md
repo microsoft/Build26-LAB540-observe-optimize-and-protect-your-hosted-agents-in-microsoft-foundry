@@ -58,7 +58,7 @@ Known issues and fixes for problems learners hit during LAB540.
 
 **Cause:** These evaluators require structured tool-trace data that **hosted agents don't currently emit in the format the evaluator expects**. It's a known contract gap between hosted-agent traces and the built-in tool evaluators.
 
-**Workaround (current template):** Phase 1 evaluator config **does not include** `tool_call_accuracy` or `tool_selection`. If you re-added them experimentally, remove them from `zava/src/zava-travel-concierge/.foundry/evaluators/phase1-builtin.yaml` until the contract is fixed.
+**Workaround (current template):** The Observe skill's generated evaluator config **does not include** `tool_call_accuracy` or `tool_selection`. If you re-added them experimentally, remove them from the generated config under `zava/src/zava-travel-concierge/.foundry/evaluators/` until the contract is fixed.
 
 ---
 
@@ -82,7 +82,7 @@ Known issues and fixes for problems learners hit during LAB540.
 
 **Workarounds:**
 1. **Use ASCII-only instructions** as your seed (replace `—` with `--`, `…` with `...`, `"smart quotes"` with `"straight quotes"`).
-2. **Manually fix the output** before pasting back into `main.py` — do a find/replace on the mojibake patterns.
+2. **Manually fix the output** before saving it back into `instructions/concierge.md` — do a find/replace on the mojibake patterns.
 3. **Treat the optimizer output as a suggestion**, not as final text — read it, decide what's good, and rewrite it cleanly.
 
 ---
@@ -132,19 +132,15 @@ To speed iterations:
 ```
 .env                           # gitignored - learner secrets
 zava/.azure/<env>/.env         # gitignored - azd env state
-.foundry/results/              # gitignored - eval result JSON
+.foundry/                      # gitignored - Foundry skill cache (datasets, evaluators, results)
 workshop/progress.json         # gitignored - your workshop progress
-workshop/scoreboard/<name>.md  # gitignored - your scoreboard
 ```
 
-Workshop seed files **are** tracked:
+Canonical workshop sources **are** tracked (the `.foundry/` cache is regenerated from these on each run):
 
 ```
-.foundry/agent-metadata.yaml   # tracked - SHOULD NOT contain your project ID
-.foundry/datasets/             # tracked - seed datasets
-.foundry/evaluators/           # tracked - evaluator configs
-workshop/scoreboard/README.md  # tracked
-workshop/scoreboard/template.md # tracked
+data/jsonl/evaluation_data.jsonl   # tracked - seed eval dataset
+data/evaluators/                   # tracked - custom evaluator definitions
 ```
 
-If you see your project endpoint or ACR name in a tracked file, **revert it before committing**.
+The `.foundry/` folder is fully gitignored and recreated on each run, so nothing required for a fresh run should live only there. If you see your project endpoint or ACR name in a tracked file, **revert it before committing**.

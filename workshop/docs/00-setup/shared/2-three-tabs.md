@@ -19,7 +19,7 @@ echo "$FOUNDRY_PORTAL_URL"
 
 Copy the URL and open it in a new tab. Sign in with the same account
 you used for `az login`. You should see your project, the
-`gpt-4.1-mini` deployment, and the **Agents** section listing the
+`gpt-5.4-mini` deployment, and the **Agents** section listing the
 Zava Travel Concierge.
 
 > **Self-Guided heads-up**: `azd up` also printed a portal link at the

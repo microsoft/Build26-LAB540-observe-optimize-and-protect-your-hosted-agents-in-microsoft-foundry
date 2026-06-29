@@ -1,0 +1,20 @@
+# ---------------------------------------------------------------------------
+# Sample .azure file
+# ---------------------------------------------------------------------------
+AGENT_ZAVA_CONCIERGE_ENDPOINT="<agent-version-endpoint-url>" # Full agent endpoint URL
+AGENT_ZAVA_CONCIERGE_NAME="<agent-name>" # Agent name
+AGENT_ZAVA_CONCIERGE_RESPONSES_ENDPOINT="<agent-responses-endpoint-url>" # OpenAI responses endpoint URL
+AGENT_ZAVA_CONCIERGE_VERSION="<agent-version>" # Numeric version as a string
+AI_PROJECT_DEPLOYMENTS="<json-array-of-deployments>" # Escaped JSON array string
+AZURE_AI_MODEL_DEPLOYMENT_NAME="<model-deployment-name>" # e.g., gpt-5.4-mini
+AZURE_AI_PROJECT_ENDPOINT="<ai-project-endpoint-url>" # https://<account>.services.ai.azure.com/api/projects/<project>
+AZURE_AI_PROJECT_ID="<ai-project-arm-resource-id>" # /subscriptions/.../resourceGroups/.../providers/Microsoft.CognitiveServices/accounts/.../projects/...
+AZURE_CONTAINER_REGISTRY_ENDPOINT="<acr-login-server>" # <registry>.azurecr.io
+AZURE_CONTAINER_REGISTRY_NAME="<acr-name>" # Registry name only
+AZURE_ENV_NAME="<azd-environment-name>" # azd env name
+AZURE_LOCATION="<azure-region>" # e.g., eastus2
+AZURE_RESOURCE_GROUP="<resource-group-name>" # Azure resource group
+AZURE_SUBSCRIPTION_ID="<subscription-id>" # Azure subscription GUID
+ENABLE_CAPABILITY_HOST="<true-or-false>" # Feature flag
+ENABLE_HOSTED_AGENTS="<true-or-false>" # Feature flag
+FOUNDRY_PROJECT_ENDPOINT="<foundry-project-endpoint-url>" # Usually same as AZURE_AI_PROJECT_ENDPOINT

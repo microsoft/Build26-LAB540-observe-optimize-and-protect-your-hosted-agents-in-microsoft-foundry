@@ -11,7 +11,7 @@ helps you move agents from prototype to production.
 > start the workshop:
 >
 > - An Azure resource group: ++@lab.CloudResourceGroup(ResourceGroup1).Name++
-> - A Microsoft Foundry project with the `gpt-4.1-mini` model deployment
+> - A Microsoft Foundry project with the `gpt-5.4-mini` model deployment
 > - The Zava Travel Concierge **hosted agent** running in your project
 > - An Azure Container Registry with the agent image
 > - Application Insights for telemetry

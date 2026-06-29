@@ -91,17 +91,6 @@ Typical findings might include:
 - Inconsistent handling of edge cases
 - Missing information in specialist agent delegations
 
-## Step 2.6: Update Your Scoreboard
-
-Record your baseline metrics in the scoreboard:
-
-| Metric | Baseline (Lab 2) |
-|--------|-----------------|
-| Relevance | _your score_ |
-| Groundedness | _your score_ |
-| Safety | _your score_ |
-| Overall | _your score_ |
-
 ---
 
 ## ✅ Checkpoint
@@ -110,6 +99,5 @@ Before moving to Lab 3, confirm:
 - [ ] Observe skill completed a full pass
 - [ ] You have evaluation results with scores
 - [ ] You have at least one optimization recommendation
-- [ ] Baseline scores recorded in your scoreboard
 
 **Next**: [Lab 3 — Optimize & Verify](./lab-3.md)
