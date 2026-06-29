@@ -34,6 +34,9 @@ Run the script to automatically have your **.env** created from the deployed inf
 
 1. [] Type this command in the terminal to execute it:  +++bash scripts/discover-env.sh+++
 1. [] You will be prompted for the name of the resource group to use. Enter the resource group name you see in the Azure portal tab. It should start with **rg-lab540-**.
+
+>[!Alert] If you try to copy-paste the value into the terminal, you will get a pop-up asking permission to **read from and write to the clipboard**. Select **Allow** — you will need this for future copy-paste actions.
+
 1. Wait till the script is complete. Verify that a **.env** was setup with all required parameters filled in.
 
 >[!Knowledge] This *.env* will be used by GitHub Copilot in a subsequent step to establish our *.azure* configuration for the Azure Developer CLI tooling.

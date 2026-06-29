@@ -4,9 +4,6 @@ Your Codespace should be ready now. Switch to its tab (Tab 3) and let's move to 
 
 1. [] Switch to the **Codespace** tab. Wait until VS Code has fully loaded.
 
->[!Alert] When the Codespace first loads, your browser may show a pop-up asking
-> permission to **read from and write to the clipboard**. Select **Allow** — this
-> is required for the type-text (+++...+++) buttons to work correctly in the VM.
 1. [] Open a terminal (**Terminal → New Terminal**).
 1. [] Confirm the core CLIs are present:
 

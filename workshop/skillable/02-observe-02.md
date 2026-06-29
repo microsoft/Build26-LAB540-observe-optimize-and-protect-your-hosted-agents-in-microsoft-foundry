@@ -11,9 +11,8 @@ Before you send the first prompt, let's turn on the **evaluators** so Foundry sc
 
 <br/>
 
->[!Knowledge] **Evaluators** are automatic graders. Foundry's built-in
-> evaluators score each response on dimensions like **task completion**,
-> **coherence**, and safety (such as **indirect attack** resistance) — no test code required. These are then displayed in aggregate as _AI Quality_ and _AI Safety_ metrics on each response as we will see later.
+>[!Knowledge] **Evaluators** are automatic graders. Foundry's built-in evaluators score each response on dimensions like **task completion**, **coherence**, and safety (such as **indirect attack** resistance) — no test code required. These are then displayed in aggregate as _AI Quality_ and _AI Safety_ metrics on each response as we will see later.
+
 ---
 
 > ✅ **Success:** evaluators are on and the playground is ready for your first

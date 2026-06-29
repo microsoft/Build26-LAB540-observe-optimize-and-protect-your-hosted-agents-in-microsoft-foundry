@@ -3,14 +3,11 @@
 Your second tab is the **Microsoft Foundry Portal**, where your hosted agent is
 deployed.
 
-1. [] Open a **new tab** in Edge and navigate to +++https://ai.azure.com+++
-1. [] Sign in - it should reuse the **same** credentials from prior step:
-
-   **Username:** +++@lab.CloudPortalCredential(User1).Username+++
-   **Password (TAP):** +++@lab.CloudPortalCredential(User1).AccessToken+++
+1. [] Open a **new tab** in Edge. Click to focus and type +++https://ai.azure.com+++ as address.
+1. [] Click the **Start Building** button - it should reuse the logged-in profile from previous step.
 
 1. [] Toggle on the **New Foundry** switch if it isn't already active.
-1. [] Select your project, then choose **Let's go**.
+1. [] Select the single project you see, then choose **Let's go**.
 
 <!-- TODO screenshot: Foundry portal home with New Foundry toggle on -->
 
