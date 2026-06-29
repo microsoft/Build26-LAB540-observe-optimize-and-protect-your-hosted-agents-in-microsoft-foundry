@@ -4,13 +4,11 @@ First, sign in to the lab VM, then open the browser. You'll work across three
 browser tabs during this lab: the **Azure Portal**, the **Foundry Portal**, and
 your **GitHub Codespace**.
 
->[!Knowledge] Text shown +++like this+++ is **type text** — click it and it is
-> typed into the VM at the current focus point, so you avoid typos.
+>[!Knowledge] Text shown +++like this+++ is **type text** — click it and it is typed into the VM at the current focus point, so you avoid typos.
 >
->[!Knowledge]  Text shown ++like this++ is **copy-paste text** - click to copy it to your clipboard, then paste it anywhere in the VM (e.g., using Ctrl+V).
->
->[!Knowledge] Each step has a **checkbox** — tick it as you go to mark it done. The lab
-> tracks these so you (and we) can see how far you've progressed.
+>[!Knowledge] Each step has a **checkbox** — tick it as you go to mark it done. The lab tracks these so you (and we) can see how far you've progressed.
+
+<br/>
 
 ## Sign in to the lab VM
 
@@ -21,6 +19,8 @@ your **GitHub Codespace**.
    **Password:** +++@lab.VirtualMachine(Win11-Pro-Base).Password+++
 
 <!-- TODO screenshot: Windows 11 desktop after sign-in -->
+
+<br/>
 
 ## Open the browser
 
@@ -35,7 +35,8 @@ your **GitHub Codespace**.
 >[!Hint] Prefer dark mode? Click the **...** menu in the Edge toolbar, open
 > **Settings**, and switch the appearance to **dark**.
 
+<br/>
+
 ---
 
-> ✅ **Success:** you're signed in to the VM and Microsoft Edge is open, ready
-> for your first tab.
+> ✅ **Success:** You signed into the VM and launched the browser for next steps.

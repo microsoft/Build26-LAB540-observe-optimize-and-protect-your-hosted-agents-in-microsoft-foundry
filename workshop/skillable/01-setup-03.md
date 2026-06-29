@@ -14,6 +14,8 @@ deployed.
 
 <!-- TODO screenshot: Foundry portal home with New Foundry toggle on -->
 
+<br/>
+
 >[!Note] A welcome tour or "create an agent" dialog may appear. Close it — your
 > agent already exists and you'll open it in the next stage.
 

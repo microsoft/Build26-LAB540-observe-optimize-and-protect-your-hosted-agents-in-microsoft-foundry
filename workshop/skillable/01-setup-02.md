@@ -14,14 +14,16 @@ group lives.
 1. [] If prompted to stay signed in, check **Don't show this again** and select
    **Yes**.
 
-![Azure portal home](https://raw.githubusercontent.com/microsoft/Build26-LAB540-observe-optimize-and-protect-your-hosted-agents-in-microsoft-foundry/aiewf26-refresh/workshop/skillable/images/01-setup-02-azure-portal-home.png)
+   ![Azure portal home](https://raw.githubusercontent.com/microsoft/Build26-LAB540-observe-optimize-and-protect-your-hosted-agents-in-microsoft-foundry/aiewf26-refresh/workshop/skillable/images/01-setup-02-azure-portal-home.png)
 
 1. [] Select **Resource groups** in the portal to view the list of resource
    groups.
 1. [] Confirm you see **two** resource groups, one of which starts with
-   **`rg-lab540`**.
+   **rg-lab540**.
 
->[!Alert] If you do **not** see a resource group starting with `rg-lab540`,
+<br/>
+
+>[!Alert] If you do **not** see a resource group starting with **rg-lab540**,
 > raise your hand and ask a proctor for help. This is likely a cold-start
 > problem where provisioning hasn't finished yet.
 

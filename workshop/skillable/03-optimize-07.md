@@ -6,11 +6,11 @@ apply.
 1. [] Review the recommendations Copilot produced.
 1. [] Ask for the leading fix if you want it called out:
 
-   ++What's the top recommendation, and what change does it propose?++
+   +++What's the top recommendation, and what change does it propose?+++
 
 1. [] Tell Copilot to apply that fix:
 
-   ++Apply the top recommendation and optimize the agent's instructions.++
+   +++Apply the top recommendation and optimize the agent's instructions.+++
 
 <!-- TODO screenshot: recommendations list with top fix selected -->
 

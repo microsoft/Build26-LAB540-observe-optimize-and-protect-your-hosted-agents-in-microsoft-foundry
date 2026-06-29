@@ -25,6 +25,8 @@ start it now and let it warm up while you explore the agent.
 > minutes to build. Leave this tab open and continue to the next stage — you'll
 > come back to it once it's ready.
 
+<br/>
+
 ---
 
 > ✅ **Success:** your Codespace is building in **Tab 3**.
