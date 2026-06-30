@@ -51,6 +51,21 @@ By completing this lab you will learn to:
 > responses are non-deterministic and samples are small (n ≈ 10). Focus on
 > learning the loop, not on matching specific numbers.
 
+### 🎙️ Session Delivery
+
+This repository will be updated continuously to reflect the latest changes to the platform and features. Want to revisit the specific version presented at a particular event? Check out the branch links below for the pinned version.
+
+| Event | Date | Branch |
+|:---|:---|:---|
+| [Microsoft Build 2026](http://build.microsoft.com/sessions/lab540) | Jun 2-3, 2026 | [msbuild26-release](https://github.com/microsoft/Build26-LAB540-observe-optimize-and-protect-your-hosted-agents-in-microsoft-foundry/tree/msbuild26-release)|
+| [AI Engineer World Fair 2026](https://www.ai.engineer/worldsfair/schedule?track=Track+M)  | Jun 29, 2026 | [aiewf26-refresh](https://github.com/microsoft/Build26-LAB540-observe-optimize-and-protect-your-hosted-agents-in-microsoft-foundry/tree/aiewf26-refresh) |
+| | |
+
+Check back soon for a detailed _session-delivery-resources_ folder with more detailed guidance for both instructors and self-guided laarners.
+> 🆕 **Instructor Deck:** **[view or download a PDF version](https://speakerdeck.com/nitya/observe-optimize-and-protect-your-hosted-agents-in-microsoft-foundry?slide=6)** for reference. Check back for updated resources to recreate and customize this for your own sessions.
+
+<br/>
+
 
 ### 🏫 Getting started
 
@@ -67,9 +82,9 @@ There are **three paths** through this lab — pick the one that matches how you
 
 | Path | For | Start Here |
 |------|-----|------------|
-| 🏫 **Skillable** (in-venue) | Build attendees — Azure RG and Foundry agent are pre-provisioned for you | [`workshop/skillable`](./workshop/skillable/README.md) |
-| 🏠 **Self-Guided** (at-home) | You'll provision everything yourself with `azd up` | [`workshop/self-guided`](./workshop/self-guided/README.md) |
-| 🧪 **Experimental** (with GitHub Copilot) | A guided, Copilot-driven experience with inline troubleshooting | [`workshop/docs`](./workshop/docs/README.md) |
+| 🏫 **Skillable** (in-venue)| Build attendees — Azure RG and Foundry agent are pre-provisioned with a Skillable Azure subscription | [`workshop/skillable`](./workshop/skillable/README.md) |
+| 🏠 **Self-Guided** (at home)  | You'll provision everything yourself with `azd up` using your own Azure subscription. | [`workshop/self-guided`](./workshop/self-guided/README.md) |
+| 🧪 **AI-Assisted** (experimental) | A guided, Copilot-driven experience with inline troubleshooting that should work with either | [`workshop/docs`](./workshop/docs/README.md) |
 
 ---
 
